@@ -1,7 +1,12 @@
 import React from 'react'
+import { useState } from 'react';
 import { Container, Div, Image, Nav, Navlink } from '../Global/Global'
 import { IoBagOutline } from "react-icons/io5";
+import { ImSpoonKnife } from "react-icons/im";
+import { AiOutlineMenu } from "react-icons/ai";
 import styled from 'styled-components';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
 
 const Span = styled.span`
@@ -24,51 +29,63 @@ text-decoration: none;
 color: #fff;
 `
 
+const IconAiOutlineMenu = styled(AiOutlineMenu)`
+position: absolute;
+right: 0;
+top: 50%  ;
+transform: translateY(-50%);
+`
 
 const Navbar = () => {
+
+  const [nav , setNav ] = useState(false)
+
+
+
+
+
   return (
-    <Nav $bg='#000' $color='#fff'>
+    <Nav $bg='#000' $color='#fff' $height='80px' >
 
-    <Container $display='flex'  $ai='center' $width='95%' $LG_width='80%' $height='auto' $margin='auto' $fs='1rem' >
+    <Container  $display='flex' $height='100%'  $ai='center' $width='95%' $LG_width='80%' $gap='1rem' $margin='auto' $fs='1rem' $position='relative'>
 
-        <Div $display='flex' $ai='center' $width='10rem' >
-            <Navlink $color='#fff' $td='none'>
-                <Image $width='100%' $height='100%' $of='cover' src='/foody.png'/>
-          </Navlink>
-        </Div>
+              <Div $display='flex' $ai='center' $width='auto' >
+                  <Navlink $color='#fff' $td='none'>
+                      <ImSpoonKnife size={40}/>
+                </Navlink>
+              </Div>
 
-      <Div $flex='1' $LG_flex='4'  $display='flex' $jc='center' $gap='2rem'>
-        <NavlinkItem>
-          Home
-        </NavlinkItem>
-        <NavlinkItem >
-          About
-        </NavlinkItem>
-      </Div>
-      <Div>
 
-      </Div>
-
-      <Div $flex='1'  $display='flex' $jc='center' $ai='center' $gap='2rem'>
+         
+            <Div $flex='1' $LG_flex='3'  $display='flex' $jc='center' $gap='2rem'>
+                  <NavlinkItem>
+                    Home
+                  </NavlinkItem>
+                  <NavlinkItem >
+                    About
+                  </NavlinkItem>
+            </Div>
         
-              <Div $position='relative' $display='flex' $jc='center' $ai='center'>
-                    <IoBagOutline size='25' /> 
-                    <Span>1</Span>
-                </Div> 
 
-        <NavlinkItem $td='none'>
-          Log In 
-        </NavlinkItem>
-        <NavlinkItem $td='none'>
-          Sign Up
-        </NavlinkItem>
-      </Div>
-      <Div>
+            <Div $flex='1'  $display='flex' $jc='center' $ai='center' $gap='2rem'>
+              
+                    <Div $position='relative' $display='flex' $jc='center' $ai='center' $width='auto'>
+                          <IoBagOutline size='20'/> 
+                          <Span>1</Span>
+                      </Div> 
 
-      </Div>
-    </Container>
+              <NavlinkItem $td='none'>
+                Login 
+              </NavlinkItem>
+              <NavlinkItem $td='none'>
+                SignUp
+              </NavlinkItem>
+            </Div>
+           
+
+          </Container>
     </Nav>
-  )
-}
-
+    )
+  }
+  
 export default Navbar

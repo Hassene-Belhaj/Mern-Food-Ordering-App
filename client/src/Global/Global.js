@@ -226,10 +226,12 @@ export const TextArea = styled.textarea`
 ${sharedProps} ;
 `
 
-export const Title = styled.h2`
+export const Title2 = styled.h2`
 ${sharedProps};
 `
-
+export const Title3 = styled.h3`
+${sharedProps};
+`
 export const Text = styled.p`
 ${sharedProps} ;
 `
