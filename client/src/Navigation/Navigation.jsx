@@ -14,11 +14,11 @@ const Navigation = () => {
         <Navbar />
         <Routes>
                <Route path='/'  element={<Home />} />
-               <Route path='/'  element={<Login />} />
-               <Route path='/'  element={<Register />} />
-               <Route path='/'  element={<Menu />} />
-               <Route path='/'  element={<Cart />} />
-               <Route path='/'  element={<PaymentSuccess />} />
+               <Route path='/login'  element={<Login />} />
+               <Route path='/register'  element={<Register />} />
+               <Route path='/menu'  element={<Menu />} />
+               <Route path='/cart'  element={<Cart />} />
+               <Route path='/paymentsuccess'  element={<PaymentSuccess />} />
         </Routes>
 
     </BrowserRouter>

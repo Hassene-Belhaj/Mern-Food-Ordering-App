@@ -4,6 +4,8 @@ require('dotenv').config();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const Products_router = require('./Routes/products');
+const { errorHandling } = require('./MidleWare/errorHandler');
+const { NotFound } = require('./MidleWare/NotFound');
 
 const app = express()
 
@@ -27,7 +29,6 @@ const Start = async() => {
         await ConnectToDataBase(process.env.DATABASE , console.log('connected to db'))
         Server()
     } catch (error) {
-
         return error
     }
 }
@@ -36,4 +37,8 @@ const Start = async() => {
 Start()
 
 
-app.use('/products' , Products_router)
+
+
+app.use('/api/products' , Products_router)
+app.use(errorHandling)
+app.use(NotFound)

@@ -4,26 +4,28 @@ var productsSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true,
-        unique:true,
     },
     adjective:{
         type:String,
         required:true,
-        unique:true,
     },
-    desc:{
+    description:{
         type:String,
         required:true,
-        unique:true,
     },
     price:{
         type:String,
         required:true,
     },
     category : {
-        type :  String ,
-        required : true
-    }
+        name : {
+            type :  String ,
+            required : true
+        },
+    },
+    imageUrl : {
+      type : String
+    }    
 
 },{timestamps : true});
 

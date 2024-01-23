@@ -6,35 +6,44 @@ import { useState } from 'react'
 import ProductCard from './ProductCard'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
-
+import { useDispatch} from 'react-redux'
+import { addToCart } from '../Redux/Cart/cartSlice'
 const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
+      breakpoint: { max: 4000, min: 1240 },
       items: 4
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4
+      breakpoint: { max: 1240, min: 1040 },
+      items: 3
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1040, min: 660 },
       items: 2
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 660, min: 0 },
       items: 1
     }
   };
 
-const stracture = [
+
+const structure = [
    {_id : '' , name : '' , adjective : '' , description : '' , category : {name : ''} , imageUrl : '' , price : '' , updatedAt : ''}
 ]
  
 
+
 const Products = () => {
-    const [products , setProducts] = useState(stracture)
+    const [products , setProducts] = useState(structure)
+    const dispatch = useDispatch()
+
+
+    const addProduct = (product) => {
+        dispatch(addToCart(product))
+    }
+
+
 
     console.log(products);
 
@@ -53,22 +62,21 @@ useEffect(()=>{
     FecthProducts()
 },[])    
 
-    return (
-    <Section $margin='auto' $padding='4rem 0' >
-            <Carousel responsive={responsive}
-              infinite={true}
-     
-
-            >
+    return ( 
+    <Section  $bg='#000'>
+        <Div $width='80%' $margin='auto'>
+        <Carousel responsive={responsive}
+   
+        >
             {products.length > 0 && products.map((product , i)=> {
                 return (
-                    <Div $display='flex' $jc='center' $margin='auto' key={i}>
-                        <ProductCard  product={product} />
-                    </Div>
-                )
+                    <Div $display='flex' $jc='center' $ai='start' $margin='auto'  $width='auto' $height='500px' key={i}> 
+                          <ProductCard  product={product} addProduct={addProduct} />
+                     </Div>
+               )
             })}
-
-            </Carousel>
+        </Carousel>;
+            </Div>
         </Section>
     )
 }

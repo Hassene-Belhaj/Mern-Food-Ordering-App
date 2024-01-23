@@ -1,11 +1,13 @@
 const mongoose = require('mongoose'); 
 
 var categoriesSchema = new mongoose.Schema({
-    ategory:{
-        type:String,
-    },
-
-});
+         name : {
+             type: String ,
+             required : true,                
+            }
+        },
+        
+        );
 
 //Export the model
 module.exports = mongoose.model('Categories', categoriesSchema);

@@ -1,12 +1,10 @@
 import React from 'react'
-import { useState } from 'react';
 import { Container, Div, Image, Nav, Navlink } from '../Global/Global'
 import { IoBagOutline } from "react-icons/io5";
 import { ImSpoonKnife } from "react-icons/im";
 import { AiOutlineMenu } from "react-icons/ai";
 import styled from 'styled-components';
-import { useRef } from 'react';
-import { useEffect } from 'react';
+
 
 
 const Span = styled.span`
@@ -14,6 +12,7 @@ position: absolute;
 width:90% ;
 height: 90%;
 background-color: #f97316;
+/* background-color: #10b981; */
 border-radius: 25px;
 top: 0rem;
 right: -1rem;
@@ -38,7 +37,6 @@ transform: translateY(-50%);
 
 const Navbar = () => {
 
-  const [nav , setNav ] = useState(false)
 
 
 
@@ -51,7 +49,7 @@ const Navbar = () => {
 
               <Div $display='flex' $ai='center' $width='auto' >
                   <Navlink $color='#fff' $td='none'>
-                      <ImSpoonKnife size={40}/>
+                      <ImSpoonKnife size={22}/>
                 </Navlink>
               </Div>
 
@@ -67,10 +65,10 @@ const Navbar = () => {
             </Div>
         
 
-            <Div $flex='1'  $display='flex' $jc='center' $ai='center' $gap='2rem'>
+            <Div $flex='1'  $display='flex' $jc='end' $ai='center' $gap='2rem'>
               
                     <Div $position='relative' $display='flex' $jc='center' $ai='center' $width='auto'>
-                          <IoBagOutline size='20'/> 
+                          <IoBagOutline size='21'/> 
                           <Span>1</Span>
                       </Div> 
 
