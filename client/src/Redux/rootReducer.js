@@ -1,11 +1,14 @@
 import { combineReducers } from "redux";
 import cartSlice from "./Cart/cartSlice";
+import productsSlice from "./Products/productsSlice";
 
 
 
 const rootReducer = combineReducers({
-    cart : cartSlice
+    cart : cartSlice ,
+    products : productsSlice ,
+
 })
 
 
-export default rootReducer ;
+export default rootReducer;

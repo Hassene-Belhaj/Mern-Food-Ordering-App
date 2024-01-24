@@ -8,6 +8,8 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch} from 'react-redux'
 import { addToCart } from '../Redux/Cart/cartSlice'
+
+
 const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1240 },
@@ -37,6 +39,7 @@ const structure = [
 const Products = () => {
     const [products , setProducts] = useState(structure)
     const dispatch = useDispatch()
+
 
 
     const addProduct = (product) => {

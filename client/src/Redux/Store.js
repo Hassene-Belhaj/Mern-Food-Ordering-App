@@ -1,9 +1,13 @@
 import {configureStore ,  applyMiddleware} from '@reduxjs/toolkit'
 import { thunk } from 'redux-thunk'
-import rootReducer from './rootReducer'
+import rootReducer from './rootReducer';
 
 
-const Store = configureStore({reducer : rootReducer} , applyMiddleware(thunk))
+const Store = configureStore(
+
+    { reducer : rootReducer } , applyMiddleware(thunk)
+    
+    )
 
 
 
