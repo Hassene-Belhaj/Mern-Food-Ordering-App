@@ -1,15 +1,23 @@
 import React from 'react'
-import { Div, Image, Title3 } from '../Global/Global'
+import { Div, Image, Text, Title3 } from '../Global/Global'
 
 const ProdcutDetailsCard = ({product}) => {
+    console.log(product.imageUrl.length);
   return (
-    
-    <Div  $gap='.5rem'>
-        <Title3>{product.name}</Title3>
-        <Div $width='200px'> 
-            <Image $width='100%' src={product.imageUrl} />
+      // <>
+      // {product.imageUrl.length}
+      // </>
+
+<Div  $width='50%' $margin='auto' $padding='0 0 4rem 0'>
+        <Div $display='flex' $jc='space-between'>
+            <Title3 >{product.name}</Title3>
+            <Title3 > $ {product.price}</Title3>
         </Div>
-        <Title3> ${product.price}</Title3>
+
+        <Div $display='flex' $jc='center' > 
+            <Image $width='200px' src={product.imageUrl} />
+        </Div>
+        <Text $ta='center'>{product.description}</Text>
 
     </Div>
   )

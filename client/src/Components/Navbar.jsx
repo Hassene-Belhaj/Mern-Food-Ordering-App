@@ -11,8 +11,8 @@ const Span = styled.span`
 position: absolute;
 width:90% ;
 height: 90%;
-background-color: #f97316;
-/* background-color: #10b981; */
+/* background-color: #f97316; */
+background-color: #10b981;
 border-radius: 25px;
 top: 0rem;
 right: -1rem;
@@ -43,7 +43,7 @@ const Navbar = () => {
 
 
   return (
-    <Nav $bg='#000' $color='#fff' $height='80px' >
+    <Nav $bg='#000' $color='#fff' $width='100vw'  $height='80px' >
 
     <Container  $display='flex' $height='100%'  $ai='center' $width='95%' $LG_width='80%' $gap='1rem' $margin='auto' $fs='1rem' $position='relative'>
 

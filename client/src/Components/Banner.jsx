@@ -11,14 +11,14 @@ const Banner = () => {
                 <Title2 $fs='2rem'>Lorem ipsum dolor, sit amet consectetur lorem Ipsum Food ?</Title2>
                     <Text $margin='1rem' $fw='600'>Get Started Today !</Text>
             <Div $display='flex'  $gap='1rem'>
-                <Button  $fw='600' $width='10rem' $height='3rem' $outline='none' $border='none' $bg='#f97316' $br='25px' $opacity='0.9' $transition='all ease-in-out 0.3s '>Order Now</Button>
+                <Button  $fw='600' $width='10rem' $height='3rem' $outline='none' $border='none' $bg='#10b981' $br='25px' $opacity='0.9' $transition='all ease-in-out 0.3s '>Order Now</Button>
                 <Navlink to='/menu'>
-                  <Button  $fw='600' $width='10rem' $height='3rem' $color='#f97316' $outline='none' $border='3px solid #f97316' $bg='transparent' $br='25px' $opacity='0.9' $transition='all ease-in-out 0.3s '>See Menu</Button>
+                  <Button  $fw='600' $width='10rem' $height='3rem' $color='#10b981' $outline='none' $border='3px solid #10b981' $bg='transparent' $br='25px' $opacity='0.9' $transition='all ease-in-out 0.3s '>See Menu</Button>
                 </Navlink>
             </Div>    
             </Div>
             <Div $flex='1'  $display='flex' $jc='center' $ai='center'>
-                <Image $width='40%'  $of='cover' src='/pizza_banner2.png'/>
+                <Image $width='50%'  $of='cover' src='/pizza_banner4.png'/>
             </Div>    
         </Container>
     </Section>

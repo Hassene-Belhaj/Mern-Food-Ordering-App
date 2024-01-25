@@ -6,25 +6,6 @@ const _ = require('lodash');
 const Category = require('./Models/category');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const Start = async () => {
   try {
       await ConnectToDataBase(process.env.DATABASE ,console.log('connected to database'))
@@ -33,16 +14,16 @@ const Start = async () => {
 
       let imageUrls = [
           'https://res.cloudinary.com/dh8tvkqrq/image/upload/v1705786485/food%20app/dish2_wc7sky.png',
-          'https://res.cloudinary.com/dh8tvkqrq/image/upload/v1705780483/dish1_kp2rii.png' ,
           'https://res.cloudinary.com/dh8tvkqrq/image/upload/v1705788131/dish3_go7vw4.png' ,
-
+          'https://res.cloudinary.com/dh8tvkqrq/image/upload/v1706219344/1233_t9ftlx.png' ,
+          'https://res.cloudinary.com/dh8tvkqrq/image/upload/v1706221334/1_mfgcb5_tpvh8q.png'
       ] 
 
       await Category.deleteMany()
       await Category.insertMany(categories)
 
       let products = [] ;
-      for(let i = 0 ; i < 10 ; i++) {
+      for(let i = 0 ; i < 15 ; i++) {
         let newProduct = {
           name : faker.commerce.productName(),
           adjective : faker.commerce.productAdjective(),
