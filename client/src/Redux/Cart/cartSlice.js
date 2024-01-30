@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-
 const initialState = {
-    products : []
+    products : [] ,
 }
 
 export const cartSlice = createSlice({
@@ -10,24 +9,43 @@ export const cartSlice = createSlice({
     initialState ,
     reducers : {
         addToCart : (state, action) => {
-            return  { products : [...state.products , {...action.payload , amount : 1}] }
+         const itemincart = state.products.find((product)=>product._id === action.payload._id)
+         if(itemincart) {
+            itemincart.amount++
+         } else {
+            state.products.push({...action.payload , amount : 1})
+         }
         },
         clearCart : (state) => {
-            return { products : [] }
+            state.products = []
         },
-        incrementProductAmount : (state,action) => {
-            return { products : state.products.map((p)=>p.id === action.payload.id ? {...products , amount : products.amount + 1} : product) }
+
+        incrementProductAmount: (state, action) => {
+            console.log('increment');
+            const item = state.cart.find((product) => product._id === action.payload._id);
+            item.quantity++;
         },
-        decrementProductAmount : (state,action) => {
-            return  { products : state.products.map((p)=>p.id === action.payload.id ? {...products , amount : products.amount - 1} : product) }
-        }
-    }
+        decrementProductAmount: (state, action) => {
+                const item = state.cart.find((product) => product._id === action.payload._id);
+                if (item.quantity === 1) {
+                  item.quantity = 1
+                } else {
+                  item.quantity--;
+                }
+        },
+        removeProduct: (state, action) => {
+            const removeItem = state.cart.filter((product) => product._id !== action.payload._id);
+            state.cart = removeItem;
+          },
+    },
+   
 })
 
 
 
-
-export const  {addToCart , clearCart , incrementProductAmount , decrementProductAmount} = cartSlice.actions
+export const  {addToCart , clearCart , incrementProductAmount , decrementProductAmount , removeProduct} = cartSlice.actions
 
 export default cartSlice.reducer
+
+
 

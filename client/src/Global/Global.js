@@ -8,10 +8,14 @@ export const Global_Style = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+    letter-spacing: .8px;
 }
 
 html {
+    background: #000;
+    color: #fff;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 
 }
 
@@ -250,6 +254,7 @@ ${sharedProps};
 
 // export const Blue = '#818cf8'
 // export const Orange = '#f97316'
+// #10b981
 
 
 

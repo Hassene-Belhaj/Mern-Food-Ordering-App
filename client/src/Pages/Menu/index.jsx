@@ -3,9 +3,21 @@ import { useDispatch  , useSelector} from 'react-redux'
 import { Container, Div, Image, Title3 } from '../../Global/Global'
 import { fetchProducts } from '../../Redux/Products/productsSlice'
 import Spinner from '../../utils/Spinner'
-import ProdcutDetailsCard from '../../Components/ProdcutDetailsCard'
+import MenuProdcutDetailsCard from '../../Components/MenuProdcutDetailsCard'
 import Tabs from '../../Components/Tabs'
 import { useState } from 'react'
+import styled from 'styled-components'
+
+const Grid = styled.div`
+width : 90%;
+display: grid;
+grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
+justify-content: center;
+align-items: center;
+margin: auto;
+gap : 2rem;
+`
+
 
 const index = () => {
    const [activeTab , setActiveTab] = useState(0)
@@ -22,34 +34,43 @@ const index = () => {
 
   console.log(products?.products[1]?.name) 
   return (
-    <Container $padding='2rem 0' $bg='#000' $color='#fff' $width='100vw'> 
-    
-         <Div  $display='flex' $jc='center'  $gap='2rem' $width='auto' $height='40px'  $margin='1rem auto 4rem auto' $tt='uppercase'  >
+    <Container $bg='#000' $color='#fff' $width='100vw' $height='100%' $margin='auto' $padding='4rem 0 0  0'> 
+         {!products.products[0] ? 
+         <Spinner />
+         :
+         <>
+               <Div  $display='flex' $jc='center'  $gap='2rem'  $height='40px' $padding='0 0 2rem 0'  $margin='0rem 0 8rem auto' $tt='uppercase'  >
               {products.products.map((productCategory , i) => {
                 return (
-                  <Tabs key={i} index={i} list={productCategory.name.name}
+                  <Tabs
+                   key={i} index={i} list={productCategory.name.name}
                    activeTab={activeTab} 
-                   setActive={setActiveTab} />
+                   setActive={setActiveTab} 
+                   switchColor='#10b981' 
+                   />
                 )
               })}
 
          </Div>
 
-          <Tabs />
-      {products.status === 'pending' ? <Spinner /> : 
-      <Div $height='100%'> 
-        {products.products[0] && products.products[activeTab].products.map((item , index) => {
+      {!products.status === 'fulfilled' ? <Spinner /> : 
+      <Grid> 
+        {products.products[activeTab] && products.products[activeTab].products.map((item , index) => {
           return (
             <Div key={index} $gap='2rem'>
-              <ProdcutDetailsCard  product={item}/>
+              <MenuProdcutDetailsCard  product={item}/>
             </Div>
           )
         }) }
 
-      </Div>
+      </Grid>
       
       
-      }
+      } 
+         </>
+        }
+    
+    
 
       
     </Container>

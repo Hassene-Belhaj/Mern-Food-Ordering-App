@@ -12,6 +12,7 @@ padding: ${({$padding})=>$padding ? $padding : '5rem'};
 
 const Logo = styled(ImSpoonKnife)`
 position: absolute;
+color: #fff;
 `
 
 const rotate360 = keyframes`
@@ -27,12 +28,12 @@ to {
 
 const SpinnerLoading = styled.div`
 animation : ${rotate360} 1s linear infinite;
-width: 40px;
-height: 40px;
-border-top: 3px solid  rgba(0,0,0,1);
-border-right: 3px solid  rgba(0,0,0,1);
-border-left: 3px solid  rgba(0,0,0,1);
-border-bottom: 3px solid  rgba(0,0,0,0.2);
+width: 60px;
+height: 60px;
+border-top: 3px solid  #10b981;
+border-right: 3px solid  #10b981;
+border-left: 3px solid  #10b981;
+border-bottom: 3px solid rgba(0,0,0,0);
 background-color: transparent;
 border-radius: 50%;
 `
@@ -48,7 +49,7 @@ const Spinner = () => {
           <Logo />
           </Div>
 
-          <Text  $fw='500' $fs='1rem' $ta='center' $padding='10px 0'>Please wait</Text>
+          <Text  $fw='500' $fs='.8rem' $color='#fff' $ta='center' $padding='10px 0' >Please wait</Text>
     </Container>
   )
 }

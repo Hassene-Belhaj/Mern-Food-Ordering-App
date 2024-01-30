@@ -1,9 +1,55 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { Container, Div, Section, Text, Title2, Title3 } from '../../Global/Global';
+import Tabs from '../../Components/Tabs';
+import { useState } from 'react';
+import AddressForm from '../../Components/AddressForm';
+
 
 const index = () => {
-  return (
-    <div>cart</div>
+
+ const cart = useSelector(state=>state.cart)
+console.log(cart.products);
+
+ const tabs = ['Summary' , 'Delivery' , 'Payment' ]
+
+ const Height =`calc(100vh - 80px)`
+
+ const [activeTab , setActiveTab] = useState(0)
+ const height = `calc(100vh - 80px)`
+
+
+   if(cart.products.length === 0) return  <Container $width='100%' $height={height}  $padding='5rem 0 0 0' $color='#000' $bg='#fff'><Text $ta='center' $fw='500' $padding='5rem 0 0 0'>Your Cart Is empty </Text></Container>
+   else {
+     return (
+     <Container $width='100%' $height={height}  $padding='5rem 0 0 0' $color='#000' $bg='#fff'>
+        <Div  $display='flex' $jc='center'  $gap='2rem' $width='80%' $height='40px' $padding='0 0 2rem 0'  $margin='auto' $tt='uppercase' >
+
+          {tabs.map((tab , index) => {
+            return (
+              <Tabs key={index} index={index} list={tab} activeTab={activeTab} setActive={setActiveTab} switchColor='#000' tabColor='#000' />
+              )
+            })}
+        
+        </Div>
+
+      <Section $padding='4rem 0 0 0' $width='600px' $margin='auto'>
+        {activeTab === 0 ? 
+        <Div> 
+          
+          <AddressForm activeTab={activeTab} setActiveTab={setActiveTab}/>
+         
+        
+        </Div> : null}
+        {activeTab === 1 ? <>delivery</> : null}
+        {activeTab === 2 ? <>payment</> : null}
+      </Section>
+
+
+    </Container>
+
   )
+}
 }
 
 export default index

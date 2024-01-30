@@ -8,6 +8,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch} from 'react-redux'
 import { addToCart } from '../Redux/Cart/cartSlice'
+import Spinner from '../utils/Spinner'
 
 
 const responsive = {
@@ -48,12 +49,11 @@ const Products = () => {
 
 
 
-    console.log(products);
 
     const FecthProducts = async() => {
         try {
             const {data} = await axios.get('/products')
-            console.log(data.resp);
+            // console.log(data.resp);
             setProducts(data.resp)
         } catch (error) {
             console.log(error);
@@ -66,20 +66,24 @@ useEffect(()=>{
 },[])    
 
     return ( 
-    <Section  $bg='#000'>
-        <Div $width='80%' $margin='auto'>
-        <Carousel responsive={responsive}
-   
-        >
-            {products.length > 0 && products.map((product , i)=> {
+        <Section  $bg='#000'>
+           {products.length > 1 ?     
+            <Div $width='80%' $margin='auto'>
+            
+        <Carousel responsive={responsive}>
+            {products.map((product , i)=> {
                 return (
                     <Div $display='flex' $jc='center' $ai='start' $margin='auto'  $width='auto' $height='500px' key={i}> 
                           <ProductCard  product={product} addProduct={addProduct} />
                      </Div>
                )
             })}
-        </Carousel>;
+        </Carousel>
             </Div>
+            :
+            <Spinner/>
+            }
+   
         </Section>
     )
 }

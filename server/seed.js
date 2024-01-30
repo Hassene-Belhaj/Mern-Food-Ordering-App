@@ -15,7 +15,6 @@ const Start = async () => {
       let imageUrls = [
           'https://res.cloudinary.com/dh8tvkqrq/image/upload/v1705786485/food%20app/dish2_wc7sky.png',
           'https://res.cloudinary.com/dh8tvkqrq/image/upload/v1705788131/dish3_go7vw4.png' ,
-          'https://res.cloudinary.com/dh8tvkqrq/image/upload/v1706219344/1233_t9ftlx.png' ,
           'https://res.cloudinary.com/dh8tvkqrq/image/upload/v1706221334/1_mfgcb5_tpvh8q.png'
       ] 
 
