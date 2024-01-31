@@ -10,7 +10,6 @@ const TabItem = ({title,index,activeTab , setActive , switchColor, tabColor}) =>
   setActive(index)
  }
 
-console.log(tab);
 
   return (
     <Div $cursor='pointer' $borderB={activeTab === index ? `solid .5px ${switchColor} ` : null} $padding='0 0 8px 0'>

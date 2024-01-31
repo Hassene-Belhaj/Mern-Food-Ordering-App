@@ -34,12 +34,12 @@ const index = () => {
 
   console.log(products?.products[1]?.name) 
   return (
-    <Container $bg='#000' $color='#fff' $width='100vw' $height='100%' $margin='auto' $padding='4rem 0 0  0'> 
+    <Container $width='100vw' $height='100%' $margin='auto' $padding='4rem 0 0  0'> 
          {!products.products[0] ? 
          <Spinner />
          :
          <>
-               <Div  $display='flex' $jc='center'  $gap='2rem'  $height='40px' $padding='0 0 2rem 0'  $margin='0rem 0 8rem auto' $tt='uppercase'  >
+          <Div  $display='flex' $jc='center'  $gap='2rem'  $height='40px' $padding='0 0 2rem 0'  $margin='0rem 0 8rem auto' $tt='uppercase'  >
               {products.products.map((productCategory , i) => {
                 return (
                   <Tabs

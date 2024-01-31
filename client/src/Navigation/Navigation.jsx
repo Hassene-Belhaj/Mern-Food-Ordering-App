@@ -20,7 +20,6 @@ const Navigation = () => {
                <Route path='/cart'  element={<Cart />} />
                <Route path='/paymentsuccess'  element={<PaymentSuccess />} />
         </Routes>
-
     </BrowserRouter>
   )
 }

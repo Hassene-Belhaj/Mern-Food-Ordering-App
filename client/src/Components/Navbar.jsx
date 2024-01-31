@@ -4,12 +4,14 @@ import { IoBagOutline } from "react-icons/io5";
 import { ImSpoonKnife } from "react-icons/im";
 import { AiOutlineMenu } from "react-icons/ai";
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const Span = styled.span`
 position: absolute;
 width:100% ;
 height: 100%;
-/* background-color: #f97316; */
 background-color: #10b981;
 border-radius: 25px;
 top: -.5rem;
@@ -17,7 +19,7 @@ right: -1.1rem;
 display: flex;
 justify-content: center;
 align-items: center;
-font-size: .85rem;
+font-size: .75rem;
 font-weight: 600;
 color: #fff ;
 `
@@ -38,6 +40,20 @@ transform: translateY(-50%);
 `
 
 const Navbar = () => {
+  const cart = useSelector(state=>state.cart)
+
+  const [bag , setBag ] = useState(0)
+
+useEffect(()=>{
+const bagQuantity = cart.cart.reduce((accu , curr) => {
+  return accu + curr.amount ;
+},0)
+setBag(bagQuantity) ;
+
+},[cart.cart])
+
+
+
   return (
     <Nav $bg='#000' $color='#fff' $width='100vw'  $height='80px' >
 
@@ -62,8 +78,8 @@ const Navbar = () => {
 
                     <Navlink to='/cart' $td='none' $color='#fff'>
                       <Div  $position='relative' $display='flex' $jc='center' $ai='center' $width='auto'>
-                            <IoBagOutline size='21'/> 
-                            <Span>1</Span>
+                            <IoBagOutline size='25'/> 
+                            <Span>{bag}</Span>
                         </Div> 
                     </Navlink>
 
