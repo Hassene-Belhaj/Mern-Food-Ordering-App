@@ -5,6 +5,7 @@ import Tabs from '../../Components/Tabs';
 import { useState } from 'react';
 import AddressForm from '../../Components/AddressForm';
 import CartSummary from '../../Components/CartSummary';
+import Ordersummary from '../../Components/Ordersummary';
 
 
 const index = () => {
@@ -34,9 +35,24 @@ console.log(cart);
         
         </Div>
 
-      <Section  $padding='4rem 0 0 0' $maxwidth='600px' $margin='auto' >
-        {activeTab === 0 ? <CartSummary /> : null}
+      <Section  $padding='2rem 0 0 0' $width='90%'  $margin='auto' >
+        <Div $display='flex'>
+             {activeTab === 0 ? 
+          <>
+             <Div $flex='1' $maxwidth='600px' $padding='0 0 0 2rem'>
+             <CartSummary /> 
+           </Div>
+           <Div $flex='1' $display='flex' $ai='center' $fd='column' >
+             <Ordersummary index={0} activeTab={activeTab} setActiveTab={setActiveTab}/>
+           </Div>
+          </>
+             : null}
+
+        </Div>
+        <Div $width='500px' $margin='auto'>
         {activeTab === 1 ? <AddressForm index={1} activeTab={activeTab} setActiveTab={setActiveTab}/>: null}
+
+        </Div>
         {activeTab === 2 ? <>payment</> : null}
       </Section>
 

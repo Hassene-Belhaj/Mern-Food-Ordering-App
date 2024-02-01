@@ -55,9 +55,9 @@ setBag(bagQuantity) ;
 
 
   return (
-    <Nav $bg='#000' $color='#fff' $width='100vw'  $height='80px' >
+    <Nav $bg='#000' $color='#fff' $width='100vw'  $height='80px'  >
 
-    <Container  $display='flex' $height='100%'  $ai='center' $width='95%' $LG_width='80%' $gap='1rem' $margin='auto' $fs='1rem' $position='relative'>
+    <Container  $display='flex' $height='100%'  $ai='center' $width='90%' $LG_width='80%' $gap='1rem' $margin='auto' $fs='1rem' $position='relative'>
 
               <Div $display='flex' $ai='center' $width='auto' >
                   <Navlink to='/' $color='#fff' $td='none'>
@@ -65,7 +65,7 @@ setBag(bagQuantity) ;
                 </Navlink>
               </Div>
               
-            <Div $flex='1' $LG_flex='3'  $display='flex' $jc='center' $gap='2rem'>
+            <Div $flex='1' $LG_flex='3'  $display='flex' $jc='center' $gap='1rem'>
                   <NavlinkItem>
                     Home
                   </NavlinkItem>
@@ -74,23 +74,22 @@ setBag(bagQuantity) ;
                   </NavlinkItem>
             </Div>
         
-            <Div $flex='1'  $display='flex' $jc='end' $ai='center' $gap='2rem'>
+            <Div $flex='1'  $display='flex' $jc='end' $ai='center' $gap='2rem' $margin='0 1rem 0 0'>
 
                     <Navlink to='/cart' $td='none' $color='#fff'>
-                      <Div  $position='relative' $display='flex' $jc='center' $ai='center' $width='auto'>
+                      <Div  $position='relative' $display='flex' $jc='center' $ai='center' $width='auto' $margin='0 1rem  0 0'>
                             <IoBagOutline size='25'/> 
-                            <Span>{bag}</Span>
+                            {bag !== 0 ?  
+                            <Span>{bag}</Span> : null}
                         </Div> 
-                    </Navlink>
+                    </Navlink>  
 
-              <NavlinkItem $td='none'>
-                Login 
-              </NavlinkItem>
-              <NavlinkItem $td='none'>
-                SignUp
-              </NavlinkItem>
             </Div>
            
+              <NavlinkItem $td='none' to='/login'>
+                Login
+              </NavlinkItem>
+          
 
           </Container>
     </Nav>

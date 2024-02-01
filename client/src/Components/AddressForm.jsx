@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Div, Form, Input, Label, Span, Title3 } from '../Global/Global'
+import { Button, Div, Form, Input, Label, Span, Text, Title3 } from '../Global/Global'
 import { GrChapterNext } from "react-icons/gr";
 import { useDispatch, useSelector } from 'react-redux';
 import { addAdress } from '../Redux/Address/AddressSlice';
@@ -32,11 +32,14 @@ const AddressForm = ({activeTab , setActiveTab,index}) => {
 
   return (
     <Form $display='flex' $fd='column' $gap='2rem'  onSubmit={handleSubmit}>
+        <Div $display='flex' $jc='center' $margin='auto'>
+              <Text $fw='600' $width='80%' $ta='center'>For your transaction success, please fill the information carefully.</Text>
+        </Div>
 
        <Div $display='flex' $fd='column' $width='80%' $margin='auto' $gap='1rem' >
              <Label $fw='600'>Street Address</Label>
             <Div $width='100%' $br='5px' >
-                <Input name='street address' type='text' placeholder='Street Address' $padding='.5rem'  $width='100%' $height='2.5rem' $border='2px solid rgba(0,0,0,0.3)' $borderF='2px solid #10b981' $outline='none'  $transition='0.4s all ease-in-out' $br='5px'/> 
+                <Input name='street_address' type='text' placeholder='Street Address' $padding='.5rem'  $width='100%' $height='2.5rem' $border='2px solid rgba(0,0,0,0.3)' $borderF='2px solid #10b981' $outline='none'  $transition='0.4s all ease-in-out' $br='5px'/> 
             </Div> 
         </Div>  
 
@@ -61,7 +64,7 @@ const AddressForm = ({activeTab , setActiveTab,index}) => {
             <Div  $flex='1' $display='flex' $fd='column' $gap='1rem' >
                 <Label $fw='600'>Country</Label>
                 <Div $width='100%' $br='5px' >
-                   <Input name='country' type='country' placeholder='country' $padding='.5rem' $width='100%' $height='2.5rem' $border='2px solid rgba(0,0,0,0.3)' $borderF='2px solid #10b981' $outline='none'  $transition='0.4s all ease-in-out' $br='5px' /> 
+                   <Input name='country' type='country' placeholder='tunisia' defaultValue='tunisia'  $padding='.5rem' $width='100%' $height='2.5rem' $border='2px solid rgba(0,0,0,0.3)' $borderF='2px solid #10b981' $outline='none'  $transition='0.4s all ease-in-out' $br='5px' /> 
                 </Div>
         </Div>
 
@@ -69,7 +72,7 @@ const AddressForm = ({activeTab , setActiveTab,index}) => {
             
                <Label $fw='600'>Postal Code</Label>
               <Div $width='100%' $br='5px'>
-              <Input name='postal code' type='number' placeholder='Postal Code' $padding='.5rem' $width='100%' $height='2.5rem' $border='2px solid rgba(0,0,0,0.3)' $borderF='2px solid #10b981' $outline='none'  $transition='0.4s all ease-in-out'  $br='5px'/> 
+              <Input name='postal_code' type='number' placeholder='Postal Code' $padding='.5rem' $width='100%' $height='2.5rem' $border='2px solid rgba(0,0,0,0.3)' $borderF='2px solid #10b981' $outline='none'  $transition='0.4s all ease-in-out'  $br='5px'/> 
               </Div>
             </Div>
 

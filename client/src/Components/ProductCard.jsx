@@ -24,7 +24,7 @@ const ProductCard = ({product , addProduct}) => {
             <Text $fs='0.8rem' $ta='center' $height='110px'>{description}</Text>
              <Div $width='95%' $display='flex' $jc='space-between' $ai='center'>
                     <Title3 $ta='center'>$ {price}</Title3>
-                        <Button onClick={()=>addProduct(product)} $display='flex' $jc='center' $ai='center' $fw='800' $width='5rem' $height='2.5rem' $outline='none' $border='none' $bg='#10b981'  $br='25px' $opacity='0.9' $transition='all ease-in-out 0.3s' $margin='.5rem 0'>
+                        <Button onClick={()=>addProduct(product)} $display='flex' $jc='center' $ai='center' $fw='800' $width='3rem' $height='2.5rem' $outline='none' $border='none' $bg='#10b981'  $br='25px' $opacity='0.9' $transition='all ease-in-out 0.3s' $margin='.5rem 0'>
                             <AddIcon size={25} color='#000' />
                         </Button>
 

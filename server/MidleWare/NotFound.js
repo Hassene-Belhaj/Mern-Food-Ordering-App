@@ -4,14 +4,6 @@ const NotFound = async(req,res) => {
 
 
 
-
-
-
-
-
-
-
-
 module.exports = {
     NotFound
 };
