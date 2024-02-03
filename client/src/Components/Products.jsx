@@ -67,6 +67,7 @@ useEffect(()=>{
 
     return ( 
         <Section  $bg='#000'>
+ 
            {products.length > 1 ?     
             <Div $width='80%' $margin='auto'>
             

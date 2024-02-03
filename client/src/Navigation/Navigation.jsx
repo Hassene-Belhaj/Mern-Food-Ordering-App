@@ -4,13 +4,12 @@ import Navbar from '../Components/Navbar'
 import  Cart  from '../Pages/Cart/index'
 import  Menu  from '../Pages/Menu/index'
 import  Home  from '../Pages/Home/index'
-import  Login  from '../Pages/Login/index'
 import  PaymentSuccess  from '../Pages/PaymentSuccess/index'
 import AuthenticationForm from '../Components/AuthenticationForm'
 
 const Navigation = () => {
   return (
-    <BrowserRouter>
+    <>
         <Navbar />
         <Routes>
                <Route path='/'  element={<Home />} />
@@ -20,7 +19,7 @@ const Navigation = () => {
                <Route path='/cart'  element={<Cart />} />
                <Route path='/paymentsuccess'  element={<PaymentSuccess />} />
         </Routes>
-    </BrowserRouter>
+    </>
   )
 }
 

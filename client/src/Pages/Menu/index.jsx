@@ -8,6 +8,8 @@ import Tabs from '../../Components/Tabs'
 import { useState } from 'react'
 import styled from 'styled-components'
 
+
+
 const Grid = styled.div`
 width : 90%;
 display: grid;
@@ -29,17 +31,18 @@ const index = () => {
    dispatch(fetchProducts())
   },[])
 
-  
 
 
-  console.log(products?.products[1]?.name) 
+
+  // console.log(products?.products[1]?.name) 
   return (
-    <Container $width='100vw' $height='100%' $margin='auto' $padding='4rem 0 0  0'> 
+    <Container $width='100vw' $height='100%' $margin='auto' $padding='6rem 0 0  0'> 
+       
          {!products.products[0] ? 
          <Spinner />
          :
          <>
-          <Div  $display='flex' $jc='center'  $gap='2rem'  $height='40px' $padding='0 0 2rem 0'  $margin='0rem 0 8rem auto' $tt='uppercase'  >
+          <Div  $display='flex' $jc='center'  $gap='1rem'  $height='40px' $padding='0 0 2rem 0'  $margin='0rem 0 8rem auto' $tt='uppercase'  >
               {products.products.map((productCategory , i) => {
                 return (
                   <Tabs
@@ -55,14 +58,14 @@ const index = () => {
 
       {!products.status === 'fulfilled' ? <Spinner /> : 
       <Grid> 
-        {products.products[activeTab] && products.products[activeTab].products.map((item , index) => {
-          return (
-            <Div key={index} $gap='2rem'>
-              <MenuProdcutDetailsCard  product={item}/>
-            </Div>
-          )
-        }) }
-
+          {products.products[activeTab] && products.products[activeTab].products.map((item , index) => {
+            return (
+              <Div key={index} $gap='2rem'>
+                <MenuProdcutDetailsCard  product={item}/>
+              </Div>
+            )
+          }) 
+          }
       </Grid>
       
       

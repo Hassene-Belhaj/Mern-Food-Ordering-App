@@ -22,7 +22,7 @@ const CartSummaryCard = ({product,index}) => {
 
     const dispatch = useDispatch()
     const cart  = useSelector(state=>state.cart)
-    console.log(cart.cart);
+    // console.log(cart.cart);
 
     const incrementProduct = () => {
       dispatch(incrementProductAmount(product))

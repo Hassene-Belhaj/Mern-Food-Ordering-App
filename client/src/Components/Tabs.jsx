@@ -7,7 +7,7 @@ const Tabs = ({list ,index , activeTab , setActive , switchColor , tabColor}) =>
 
 
   return (
-         <Div>
+         <Div> 
              <TabItem index={index} title={list} activeTab={activeTab} setActive={setActive} switchColor={switchColor} tabColor={tabColor} />
          </Div>
   )

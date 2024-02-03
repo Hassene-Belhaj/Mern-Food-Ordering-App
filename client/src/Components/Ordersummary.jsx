@@ -8,10 +8,10 @@ import { GrChapterNext } from 'react-icons/gr'
 const Ordersummary = ({index , setActiveTab}) => {
 
    const cart = useSelector(state=>state.cart)
-   console.log(cart.cart);
+  //  console.log(cart.cart);
    const [totalPrice , setTotalPrice] =  useState(null)
 
-   console.log(index);
+  //  console.log(index);
 
   const Next = () => {
     setActiveTab(index+1)

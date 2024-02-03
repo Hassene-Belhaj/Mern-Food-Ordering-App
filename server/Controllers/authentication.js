@@ -23,7 +23,7 @@ const Register = AsyncWrapper(async(req,res,next) => {
      const resp = await authModel.create({
        username:uniqueUsername , 
        email,
-       password : decodedPass
+       password : decodedPass,
      })
     
      res.status(201).json({success : true , resp})
@@ -37,19 +37,43 @@ const Login = AsyncWrapper(async(req,res,next) => {
     if(!findUser) return next(createCustomError('User does not Exist' , 404)) 
     const ValidPassword = await bcrypt.compare(password , findUser.password)
     if(!ValidPassword) return next(createCustomError('invalid Crentials' , 403))
-    const token = jwt.sign({id : findUser._id , username : findUser.username } , process.env.SecretJwt , {expiresIn : "3d"})
-    await authModel.findById({_id : findUser._id} , {
-        access_token : token
-    } , {
-        new : true
+
+     // refresh token
+    const token = jwt.sign({id : findUser._id , username : findUser.username } , process.env.SECRETJWT, {expiresIn : '10s'})
+    await authModel.findOneAndUpdate({_id : findUser._id} ,
+            {
+                access_token : token
+            } ,
+            {
+                new : true
+            })
+    res.cookie('access_token' , token ,
+     {
+        httpOnly : true , 
+        secure : true , 
+        sameSite : 'none' , 
+        maxAge : 3 * 24 * 60 * 60 * 1000 
     })
-    res.cookie('access_token' , token , {httpOnly : true , secure : true ,sameSite : 'none' , })
-    res.status(200).json({success : true , msg : 'Sign In successfully'})
+
+    res.status(200).json({success : true , msg : 'Sign In successfully' , token})
+    
+})
+
+const LogOut = AsyncWrapper(async(req , res , next) => {
+     const cookies = req.cookies
+     if(!cookies.access_token) return next(createCustomError('no content' , 204))
+    res.clearCookie('access_token' , token , {httpOnly : true , secure : true , sameSite : 'none'})
+    res.json({success : true , msg : 'Cookie cleared' ,})
+})
+
+const UserInfo = AsyncWrapper(async(req,res,next) => {
+    const {id} = req.body
+    const resp = await authModel.findById({_id : id})
+    if(!user) return next(createCustomError('user not found' , 404))
+     res.status(200).json({success : true , resp})
 
 })
 
-
-
 module.exports = {
-    Register , Login
+    Register , Login , LogOut , UserInfo
 };

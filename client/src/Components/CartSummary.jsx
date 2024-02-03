@@ -5,7 +5,7 @@ import CartSummaryCard from './CartSummaryCard';
 
 const CartSummary = () => {
    const cart = useSelector(state=>state.cart)
-   console.log(cart.cart);
+  //  console.log(cart.cart);
   return (
     <Section>
         <Div $display='flex' $fd='column' $gap='3rem' $padding='0 0 2rem 0'>

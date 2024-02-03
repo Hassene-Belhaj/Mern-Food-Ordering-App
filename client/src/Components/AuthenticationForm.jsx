@@ -1,59 +1,39 @@
 import React from 'react'
 import { Button, Container, Div, Form, Input, Navlink, Text, Title2, Title3 } from '../Global/Global'
-import { FaRegEye , FaRegEyeSlash  } from "react-icons/fa6";
-import { FiUser } from "react-icons/fi";
-import { IoKeyOutline } from "react-icons/io5";
-import { MdOutlineEmail } from "react-icons/md";
-
-import styled from 'styled-components';
+import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
+import AuthenticationFormItem from './AuthenticationFormItem';
 
 
-const IconOpenEye = styled(FaRegEye)`
-position: absolute;
-top: 50%;
-right: 1rem;
-transform: translateY(-50%);
-`
 
-const IconcloseEye = styled(FaRegEyeSlash)`
-position: absolute;
-top: 50%;
-right: 1rem;
-transform: translateY(-50%);
-
-`
-
-const IconUser = styled(FiUser)`
-position: absolute;
-top: 50%;
-left: 1rem;
-transform: translateY(-50%);
-`
-const IconMail = styled(MdOutlineEmail)`
-position: absolute;
-top: 50%;
-left: 1rem;
-transform: translateY(-50%);
-`
-const IconKey = styled(IoKeyOutline)`
-position: absolute;
-top: 50%;
-left: 1rem;
-transform: translateY(-50%);
-`
 
 const AuthenticationForm = ({type}) => {
+     
+   const navigate = useNavigate()
+
+    let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // regex for email
+    let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/; // regex for password
+
 
     const Axios_APi_Call = async(serverRoute,data) => {
         try {
             const resp= await axios.post(serverRoute , data)
-            console.log(resp);
+            if(resp.status === 200) {
+                toast.success('Login Successfully Welcome')
+                setTimeout(() => { navigate('/') }, 1500)
+            }   
+            if(resp.status === 201) {
+                toast.success('Register Successfully Welcome')
+                setTimeout(() => { navigate('/login') }, 1500)
+            }
             
         } catch (error) {
-            console.log(error);
+            // console.log(typeof error.response.status);
+            if(error.response.status.toString().startsWith(4)) {
+                toast.error(error.response.data.msg)
+            }
         }
-
     }
 
 
@@ -63,8 +43,19 @@ const AuthenticationForm = ({type}) => {
     let formdata = new FormData(e.target)
     let data = {} ;
     data = Object.fromEntries(formdata.entries()) ;
-    console.log(data);
+
+    const {username , email ,password} = data ;
+
+    if(username){
+        if(username.length < 3 ) return  toast.error('Username must be at least 3 letters long')
+    }
+
+    if(!email.length ) return  toast.error('Enter email')
+    if(!emailRegex.test(email)) return  toast.error('Invalid Email')
+    if(!passwordRegex.test(password)) return toast.error('Password shoud be 6 to 9 characters long with a numeric , 1 lowercase and 1 uppercase letters')
+
     Axios_APi_Call(serverRoute , data)
+
    }
 
  
@@ -72,41 +63,45 @@ const AuthenticationForm = ({type}) => {
 
 
   return (
-    <Container $width='100%' $height={Height} $bg='#fff' $color='#000' >
-        <Div $width='400px' $padding='8rem 0' $margin='auto' >
-            <Title2 $padding='0 0 4rem 0' $ta='center'>{type=== 'register' ? 'Join Us to Day' : 'Welcome Back'}</Title2>
-            <Form  $display='flex' $fd='column' $gap='2rem' onSubmit={handleSubmitAuth}>
-                    {type === 'register' &&   <Div $position='relative' $width='100%' $height='2.5rem' $margin='auto' $br='5px'>
-                        <Input $fw='600' $colorPH='#000' name='username' placeholder='Username' type='text' $width='100%' $height='100%' $bg='#f3f5f9' $outline='none' $border='2px solid rgba(0,0,0,0)' $borderF='2px solid #10b981' $transition='all ease-in-out 0.4s' $padding='0 0 0 3rem' $br='5px'/>
-                        <IconUser size={20}  />
-                    </Div>}
-                
-                
-                    <Div $position='relative' $width='100%' $height='2.5rem' $margin='auto' $br='5px'>
-                        <Input $fw='600' $colorPH='#000' name='email' placeholder='Email' $width='100%' $height='100%' $bg='#f3f5f9' $outline='none' $border='2px solid rgba(0,0,0,0)' $borderF='2px solid #10b981' $transition='all ease-in-out 0.4s' $padding='0 0 0 3rem' $br='5px'/>
-                        <IconMail size={20}  />
-                    </Div>
-
-                    <Div $position='relative' $width='100%' $height='2.5rem' $margin='auto' $br='5px'>
-                        <Input $fw='600' $colorPH='#000' name='password'  placeholder='Password' $width='100%' $height='100%' $bg='#f3f5f9' $outline='none' $border='2px solid rgba(0,0,0,0)' $borderF='2px solid #10b981' $transition='all ease-in-out 0.4s' $padding='0 0 0 3rem' $br='5px'/>
-                        <IconKey size={20}  />
-                    </Div>
-
-                    <Div $position='relative' $padding='1rem 0'>
-                        <Button  $width='100%' $height='3rem' $outline='none' $border='none' $bg='#000' $color='#fff' $br='25px' $opacity='0.9'>{type=== 'register' ? 'Register' : 'Login'}</Button>
-                    </Div>
-                    
-                    {type === 'register'&& <Div>
-                        <Text $ta='center'>Already Member ? <Navlink to='/login' $fw='600'>Sign In </Navlink> </Text>
-                    </Div>}
-
-                    {type === 'login'&& <Div>
-                    <Text $ta='center'>Don't have an account ? <Navlink to='/register' $fw='600'>Join Us Today  </Navlink> </Text>
-                </Div>}
-                
-              
-            </Form>
-        </Div>
+    <Container $width='100vw' $height={Height} $bg='#fff' $color='#000'  >
+          <Toaster
+     position='top-center'
+      containerStyle={{
+      position: 'absolute',
+      top : '80px' ,
+      right : '0'
+    }}
+    toastOptions={{
+      style : {
+        borderRadius : '0px' ,
+        display : 'flex' ,
+        justifyContent : 'center' ,
+        alignItems : 'center' ,
+        flexDirection : 'column' ,
+        gap : '.5rem' ,
+        background : '#fff' ,
+        color : '#000',
+        padding : '1rem' ,
+        fontSize : '0.8rem' ,
+        fontWeight : '600' ,
+        textAlign : 'center',
+        borderRadius : '5px',
+      },
+      success : {
+        duration : 500 ,
+        iconTheme: {
+          primary: '#14b8a6',
+        },
+      },
+      error : {
+        duration : 1000 ,
+        iconTheme: {
+          primary: '#e11d48',
+        },
+      }
+    }}
+    />
+            <AuthenticationFormItem handleSubmitAuth={handleSubmitAuth} type={type}  />
     </Container>
   )
 }
