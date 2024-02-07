@@ -39,7 +39,7 @@ const Login = AsyncWrapper(async(req,res,next) => {
     if(!ValidPassword) return next(createCustomError('invalid Crentials' , 403))
 
      // refresh token
-    const token = jwt.sign({id : findUser._id , username : findUser.username } , process.env.SECRETJWT, {expiresIn : '10s'})
+    const token = jwt.sign({id : findUser._id , username : findUser.username } , process.env.SECRETJWT, {expiresIn : '3d'})
     await authModel.findOneAndUpdate({_id : findUser._id} ,
             {
                 access_token : token
@@ -47,12 +47,13 @@ const Login = AsyncWrapper(async(req,res,next) => {
             {
                 new : true
             })
+            
     res.cookie('access_token' , token ,
-     {
-        httpOnly : true , 
-        secure : true , 
-        sameSite : 'none' , 
-        maxAge : 3 * 24 * 60 * 60 * 1000 
+     {  
+        httpOnly : true ,
+        secure : true ,
+        sameSite : 'None' ,
+        expires : new Date(Date.now()+ 1000*60*60*24*3) , //30 seconds   path : '/' ,
     })
 
     res.status(200).json({success : true , msg : 'Sign In successfully' , token})
@@ -62,18 +63,50 @@ const Login = AsyncWrapper(async(req,res,next) => {
 const LogOut = AsyncWrapper(async(req , res , next) => {
      const cookies = req.cookies
      if(!cookies.access_token) return next(createCustomError('no content' , 204))
-    res.clearCookie('access_token' , token , {httpOnly : true , secure : true , sameSite : 'none'})
-    res.json({success : true , msg : 'Cookie cleared' ,})
+    res.clearCookie('access_token', '' , {httpOnly : true , expiresIn : new Date(0)})
+    res.json({success : true , msg : 'logged out successfully' ,})
 })
 
 const UserInfo = AsyncWrapper(async(req,res,next) => {
-    const {id} = req.body
-    const resp = await authModel.findById({_id : id})
-    if(!user) return next(createCustomError('user not found' , 404))
+    const userId = req.user.id
+    const resp = await authModel.findById({_id : userId } , "-password -access_token")
+    if(!userId) return next(createCustomError('user not found' , 404))
      res.status(200).json({success : true , resp})
 
 })
 
+const refreshToken = (req, res , next) => {
+    // const existToken = req.headers.cookie?.existToken.split('=')[1]
+    const existToken = req.cookies.access_token
+     
+    if(!existToken) {
+        return next(createCustomError( 'no token found , please Sign In ' , 401))
+    }
+    jwt.verify(existToken , process.env.SECRETJWT , (err , user) => {
+        if(err) {
+         return next(createCustomError('token is not valid !' , 403))
+        } 
+        //now clear cookie
+        res.clearCookie('access_token' , '' , {httpOnly : true , expiresIn : new Date(0)})
+
+        const token = jwt.sign({id : user.id}, process.env.SECRETJWT , {
+            expiresIn : '35s'
+        })
+        // console.log("Regenerated Token\n", token);
+
+        res.cookie('access_token' , token , {
+            path : '/' ,
+            httpOnly : true ,
+            secure : true ,
+            sameSite : 'None' ,
+            expires : new Date(Date.now()+ 1000*3) , //30 seconds
+        })
+
+        req.user = user
+        next()
+    })
+} 
+
 module.exports = {
-    Register , Login , LogOut , UserInfo
+    Register , Login , LogOut , UserInfo , refreshToken ,
 };

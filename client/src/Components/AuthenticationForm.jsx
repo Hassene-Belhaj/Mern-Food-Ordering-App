@@ -4,11 +4,17 @@ import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import AuthenticationFormItem from './AuthenticationFormItem';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
 
 const AuthenticationForm = ({type}) => {
+  
+  const authentication = useSelector(state=>state.authentication)
+  const dispatch = useDispatch()
+  console.log(authentication);
+
      
    const navigate = useNavigate()
 
@@ -85,7 +91,6 @@ const AuthenticationForm = ({type}) => {
         fontSize : '0.8rem' ,
         fontWeight : '600' ,
         textAlign : 'center',
-        borderRadius : '5px',
       },
       success : {
         duration : 500 ,

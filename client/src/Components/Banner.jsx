@@ -5,7 +5,7 @@ import { Button, Container, Div, Image, Navlink, Section, Text, Title2 } from '.
 const Banner = () => {
   return (
 
-    <Section >
+    <Section $bg='#000' $color='#fff' >
         <Container $display='flex'  $width='95%' $LG_width='80%' $fd='row' $LG_fd='row' $MD_fd='column' $SM_fd='column' $XS_fd='column' $margin='auto' $padding='2rem 0 0 0' $fw='wrap'  >
             <Div $flex='1' $display='flex' $jc='center' $ai='start' $fd='column' $padding='2rem' $gap='1rem'>
                 <Title2 $fs='1.8rem'>Lorem ipsum dolor, sit amet consectetur lorem Ipsum Food ?</Title2>

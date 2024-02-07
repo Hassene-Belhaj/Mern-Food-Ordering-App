@@ -12,8 +12,6 @@ export const Global_Style = createGlobalStyle`
 }
 
 html {
-    background: #000;
-    color: #fff;
     scroll-behavior: smooth;
     overflow-x: hidden;
 
@@ -245,6 +243,9 @@ ${sharedProps};
 `
 
 export const Span = styled.span`
+${sharedProps};
+`
+export const Footer = styled.footer`
 ${sharedProps};
 `
 

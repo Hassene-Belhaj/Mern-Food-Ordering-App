@@ -36,7 +36,7 @@ const index = () => {
 
   // console.log(products?.products[1]?.name) 
   return (
-    <Container $width='100vw' $height='100%' $margin='auto' $padding='6rem 0 0  0'> 
+    <Container $width='100vw' $height='100%' $margin='auto' $padding='6rem 0 0 0' $bg='#000' > 
        
          {!products.products[0] ? 
          <Spinner />

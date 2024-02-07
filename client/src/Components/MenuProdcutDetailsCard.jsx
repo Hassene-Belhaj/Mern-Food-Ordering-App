@@ -14,10 +14,8 @@ const addProduct = () => {
   toast.success(`${product.name} is added`)
 }
 
-// console.log(cart.cart);
-
   return (
-  <Div $width='350px' $height='auto' $margin='auto' $padding='0 0 6rem 0'>
+  <Div $width='350px' $height='auto' $margin='auto' $padding='0 0 6rem 0' $color='#fff'>
         <Div $display='flex' $jc='space-between' $ai='center'>
             <Title3 $fs='1rem'>{product.name}</Title3>
             <Title3 $fs='0.9rem'> ${product.price}</Title3>

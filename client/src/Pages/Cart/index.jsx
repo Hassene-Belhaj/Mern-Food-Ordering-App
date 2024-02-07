@@ -9,6 +9,7 @@ import Ordersummary from '../../Components/Ordersummary';
 import AuthenticationFormItem from '../../Components/AuthenticationFormItem';
 import axios from 'axios';
 import { useEffect } from 'react';
+import Payment from '../../Components/Payment';
 
 
 
@@ -17,25 +18,12 @@ const index = () => {
   // console.log(cart);
 
   const [userProfile , setUserProfile ] = useState(undefined)
-
-  const check_profile = async() => {
-    try {
-      const {data} = await axios.get('/profile') ;
-      setUserProfile(data.user)
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
+  const [time , setTime] = useState(null)
 
 
-  
 
-  useEffect(()=>{
-    check_profile()
-  },[])
 
-  console.log(userProfile);
+  console.log(time);
 
 
  const tabs = ['Summary' , 'Delivery' , 'Payment' ]
@@ -89,7 +77,7 @@ const index = () => {
             null }
         </Div>
 
-        {activeTab === 2 ? <>payment</> : null}
+        {activeTab === 2 ? <Payment /> : null}
       </Section>
 
 
