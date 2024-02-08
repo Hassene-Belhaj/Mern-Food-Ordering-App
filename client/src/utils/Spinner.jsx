@@ -6,8 +6,8 @@ import { Div, Text, Title3 } from '../Global/Global';
 
 
 const Container = styled.div`
-
 padding: ${({$padding})=>$padding ? $padding : '5rem'};
+width: ${({$width})=>$width};
 `
 
 const Logo = styled(ImSpoonKnife)`
@@ -28,8 +28,8 @@ to {
 
 const SpinnerLoading = styled.div`
 animation : ${rotate360} 1s linear infinite;
-width: 60px;
-height: 60px;
+width: ${({$spinnerWidth})=>$spinnerWidth ? $spinnerWidth : '60px'};
+height: ${({$spinnerHeight})=>$spinnerHeight ? $spinnerHeight : '60px'};
 border-top: 3px solid  #10b981;
 border-right: 3px solid  #10b981;
 border-left: 3px solid  #10b981;
@@ -40,16 +40,15 @@ border-radius: 50%;
 
 
 
-const Spinner = () => {
+const Spinner = ({padding , spinnerWidth , spinnerHeight}) => {
   return (
-    <Container>
+    <Container $padding={padding} >
           <Div $position='relative' $display='flex'  $jc='center' $ai='center'> 
-           <SpinnerLoading>
-          </SpinnerLoading>
-          <Logo />
+           <SpinnerLoading $spinnerWidth={spinnerWidth} $spinnerHeight={spinnerHeight}> </SpinnerLoading>
+          {/* <Logo /> */}
           </Div>
 
-          <Text  $fw='500' $fs='.8rem' $color='#fff' $ta='center' $padding='10px 0' >Please wait</Text>
+          {/* <Text  $fw='500' $fs='.8rem' $color='#fff' $ta='center' $padding='10px 0' >Please wait</Text> */}
     </Container>
   )
 }

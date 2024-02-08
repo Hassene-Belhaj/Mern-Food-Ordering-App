@@ -53,7 +53,7 @@ const Login = AsyncWrapper(async(req,res,next) => {
         httpOnly : true ,
         secure : true ,
         sameSite : 'None' ,
-        expires : new Date(Date.now()+ 1000*60*60*24*3) , //30 seconds   path : '/' ,
+        expires : new Date(Date.now()+ 1000*60*60*24*3) , //3days,
     })
 
     res.status(200).json({success : true , msg : 'Sign In successfully' , token})
@@ -95,7 +95,6 @@ const refreshToken = (req, res , next) => {
         // console.log("Regenerated Token\n", token);
 
         res.cookie('access_token' , token , {
-            path : '/' ,
             httpOnly : true ,
             secure : true ,
             sameSite : 'None' ,

@@ -9,6 +9,7 @@ const ItemLink = styled(Navlink)`
 text-decoration: none;
 color: #fff;
 transition:all 0.3s ease-in-out;
+font-size: 0.9rem;
 &:hover{
   color: #10b981;
 }
@@ -23,12 +24,22 @@ transition:all 0.3s ease-in-out;
 }
 `
 
+const Grid = styled.div`
+width: 90%;
+display: grid;
+margin: auto;
+justify-content: center;
+align-items: center;
+grid-template-columns: repeat(auto-fit,minmax(200px , 1fr));
+gap: 2rem;
+`
+
 
 const Footer = () => {
    const social_network = ['Instagram' , 'Facebook' , 'Linkedin' , 'Twitter' , 'Youtube']
 
   return (
-    <Container $width='100%' $bg='#000' $color='#fff' $padding='2rem 0 2rem 0' $margin='auto'>
+    <Container $width='100%' $bg='#000' $color='#fff' $padding='2rem 0 2rem 0' $margin='auto' $borderT='.5px solid rgba(255,255,255,0.1)'>
 
         <Div $width='80%' $margin='auto' $padding='2rem 0'>
             <ItemLink>
@@ -36,37 +47,22 @@ const Footer = () => {
             </ItemLink>
         </Div>
 
-            <Div $width='90%' $fw='wrap' $color='#fff' $display='flex'  $margin='auto' >
-                
-                <Div  $flex='1' $display='flex' $jc='center'   $ai='start' $fd='column' $padding='5rem' $gap='1rem'>
+            <Grid >
+                {Array(4).fill(0).map((item,i)=> {
+                    return (
+                <Div key={i}  $display='flex' $jc='center'   $ai='center' $fd='column'  $gap='1rem' $padding='4rem 0'>
                     <ItemLink >lorem ipsum</ItemLink>
                     <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                </Div>  
-                <Div  $flex='1' $display='flex'  $jc='center'  $ai='start' $fd='column' $padding='5rem' $gap='1rem'>
                     <ItemLink >lorem ipsum</ItemLink>
                     <ItemLink >lorem ipsum</ItemLink>
                     <ItemLink >lorem ipsum</ItemLink>
                     <ItemLink >lorem ipsum</ItemLink>
                     <ItemLink >lorem ipsum</ItemLink>
                 </Div>  
-                <Div  $flex='1' $display='flex'  $jc='center'  $ai='start' $fd='column' $padding='5rem' $gap='1rem'>
-                    <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                </Div>  
-                <Div  $flex='1' $display='flex'  $jc='center'  $ai='start' $fd='column' $padding='5rem' $gap='1rem'>
-                    <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                    <ItemLink >lorem ipsum</ItemLink>
-                </Div> 
-            </Div>
+                    )
+                })}
+          
+            </Grid>
                     <Div $display='flex' $jc='center' $color='#fff' $padding='2rem 0 2rem 0' >
                         <Text>All Rights Reserverd @Mern food 2024</Text>
                     </Div>

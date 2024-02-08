@@ -1,9 +1,6 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-
-
 const { createCustomError } = require('../MidleWare/errorHandler');
-const { AsyncWrapper } = require('../MidleWare/AsyncWrapper');
 
 const verfiytoken = (req,res,next) => {
     const token = req.cookies.access_token ;

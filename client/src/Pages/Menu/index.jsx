@@ -17,7 +17,7 @@ grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
 justify-content: center;
 align-items: center;
 margin: auto;
-gap : 2rem;
+gap : 4rem;
 `
 
 
@@ -33,26 +33,24 @@ const index = () => {
 
 
 
+  if(!products.products[0]) return <Container $width='100vw' $height='100vh' $margin='auto' $padding='6rem 0 0 0' $bg='#000'><Spinner padding={'10rem 0'} />   </Container>
 
-  // console.log(products?.products[1]?.name) 
-  return (
-    <Container $width='100vw' $height='100%' $margin='auto' $padding='6rem 0 0 0' $bg='#000' > 
+  else {
+
+    return (
+      <Container $width='100vw' $height='100%' $margin='auto' $padding='6rem 0 0 0' $bg='#000'> 
        
-         {!products.products[0] ? 
-         <Spinner />
-         :
-         <>
           <Div  $display='flex' $jc='center'  $gap='1rem'  $height='40px' $padding='0 0 2rem 0'  $margin='0rem 0 8rem auto' $tt='uppercase'  >
               {products.products.map((productCategory , i) => {
                 return (
                   <Tabs
-                   key={i} index={i} list={productCategory.name.name}
-                   activeTab={activeTab} 
-                   setActive={setActiveTab} 
-                   switchColor='#10b981' 
-                   />
-                )
-              })}
+                  key={i} index={i} list={productCategory.name.name}
+                  activeTab={activeTab} 
+                  setActive={setActiveTab} 
+                  switchColor='#10b981' 
+                  />
+                  )
+                })}
 
          </Div>
 
@@ -70,14 +68,13 @@ const index = () => {
       
       
       } 
-         </>
-        }
     
     
 
       
     </Container>
   )
+}
 }
 
 export default index

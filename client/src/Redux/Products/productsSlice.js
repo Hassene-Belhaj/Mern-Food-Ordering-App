@@ -23,9 +23,10 @@ export const productSlice= createSlice({
     }
 })
 
+const BASEURL  = import.meta.env.VITE_REACT_BASEURL ;
 
 export const fetchProducts = createAsyncThunk('/products/fetchProducts' , async() => {
-    const { data } =  await axios.get('/products/products_by_category')
+    const { data } =  await axios.get(BASEURL + '/products/products_by_category')
     return data.resp;
 })
 

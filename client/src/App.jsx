@@ -12,9 +12,10 @@ import Spinner from './utils/Spinner'
 
 const App = () => {
 
-  axios.defaults.baseURL = 'http://127.0.0.1:5000/api' ;
-  axios.defaults.withCredentials = true ;
+  axios.defaults.baseURL = import.meta.env.VITE_REACT_BASEURL ;
 
+  axios.defaults.withCredentials = true ;
+  
   const authentication = useSelector(state=>state.authentication)
   const dispatch = useDispatch()
   console.log(authentication);

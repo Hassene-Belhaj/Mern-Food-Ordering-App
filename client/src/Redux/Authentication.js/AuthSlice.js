@@ -6,7 +6,7 @@ import axios from "axios";
 
 const initialState = {
     auth : {} ,
-    isLoggedIn : false
+    isLoggedIn : false,
 }
 
 
@@ -19,9 +19,12 @@ const authSlice = createSlice({
        builder.addCase(fetchProfile.fulfilled , (state , action) => {
         state.status = 'fulfilled' ;
         state.auth = action.payload ;
-        state.isLoggedIn = true
-        }),
-        builder.addCase(fetchProfile.pending),(state , action) => {
+        if(state.auth !== undefined) { // if not cookie
+            state.isLoggedIn = true 
+        } 
+       }
+        )
+        builder.addCase(fetchProfile.pending) ,(state , action) => {
         state.status = 'pending'
         state.isLoggedIn = false
        } 
@@ -30,9 +33,15 @@ const authSlice = createSlice({
 
 
 export const fetchProfile = createAsyncThunk('/profile/profile' , async() => {
-    const {data } = await axios.get('/profile')
-    return data
+    try {
+        const {data } = await axios.get('/profile')
+        return data ;
+
+    } catch (error) {
+        console.log(error);
+    }
+
 })
 
+
 export default authSlice.reducer ;
-// export const {getProfile} = authSlice.actions ;

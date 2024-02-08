@@ -48,8 +48,6 @@ const Products = () => {
     }
 
 
-
-
     const FecthProducts = async() => {
         try {
             const {data} = await axios.get('/products')
@@ -68,7 +66,7 @@ useEffect(()=>{
     return ( 
         <Section  $bg='#000' $color='#fff' $margin='0 0 4rem 0'>
  
-           {products.length > 1 ?     
+           {products?.length > 1 ?     
             <Div $width='80%' $margin='auto'>
             
         <Carousel responsive={responsive}>

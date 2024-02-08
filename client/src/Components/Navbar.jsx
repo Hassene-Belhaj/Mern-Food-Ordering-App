@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Div, Image, Nav, Navlink } from '../Global/Global'
+import { Button, Container, Div, Image, Nav, Navlink } from '../Global/Global'
 import { IoBagOutline } from "react-icons/io5";
 import { ImSpoonKnife } from "react-icons/im";
 import { IoIosArrowDown } from "react-icons/io";
@@ -9,6 +9,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useLocation } from 'react-router';
 import axios from 'axios';
+import Spinner from '../utils/Spinner';
+import DropDwonMenu from './DropDwonMenu';
 
 const Span = styled.span`
 position: absolute;
@@ -43,19 +45,22 @@ transition:all 0.3s ease-in-out;
 `
 const IconArrowDown = styled(IoIosArrowDown)`
 cursor: pointer;
+transform:${({$dropDown})=>$dropDown ? 'rotate(180deg)'  : null };
+transition: all ease-in-out 0.3s;
 `
 
 
 const Navbar = () => {
 
   const [userInfo , setUserInfo] = useState(null)
-  console.log(userInfo);
+  const [dropDown , setDropDown] = useState(false)  
+  const [loading , setLoading] = useState(false)
+  // console.log(userInfo);
 
  const authentication =  useSelector(state=>state.authentication)
  const dispatch = useDispatch()
  console.log(authentication.isLoggedIn);
 
-   
 const [navItem , setNavItem]  = useState(null)
 const cart = useSelector(state=>state.cart)
 const [bag , setBag ] = useState(0)
@@ -68,7 +73,6 @@ const bagQuantity = cart.cart.reduce((accu , curr) => {
   return accu + curr.amount ;
 },0)
 setBag(bagQuantity) ;
-
 },[cart.cart])
 
 
@@ -77,21 +81,31 @@ setNavItem(location.pathname)
 },[])
 
 
-const handleLogOut = async () => {
-  try {
-    const {data} = await axios.post('/logout')
-    dispatch(logout())
-    return data
-  } catch (error) {
-    console.log(error);
-  }
-}
+// const handleLogOut = async () => {
+//   try {
+//     const {data} = await axios.post('/logout')
+//     dispatch(logout())
+//     return data
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+const handleBlur = () => { 
+  setTimeout(() => {
+  setDropDown(false)
+   }, 300)
+ }
+
 
 const fetchProfile = async() => {
+  setLoading(true)
   try {
     const {data} = await axios.get('/user_info')
     setUserInfo(data.resp)
+    setLoading(false)
   } catch (error) {
+    setLoading(false)
     console.log(error);
   }
 }
@@ -102,56 +116,76 @@ useEffect(()=> {
 },[authentication.isLoggedIn])
 
   return (
-    <Nav $bg='#000' $color='#fff' $width='100vw'  $height='80px'  >
+    <Nav $bg='#000' $color='#fff' $width='100vw' $height='80px' >
 
-    <Container  $display='flex' $height='100%'  $ai='center' $width='90%' $LG_width='80%' $gap='1rem' $margin='auto' $fs='1rem' $position='relative'>
-                
+    
+      <Container $width='100%' $height='100%' $bg='#000'>
 
-              <Div $display='flex' $ai='center' $width='auto' >
-                  <NavlinkItem to='/' onClick={()=>setNavItem('/home')} $color={'#fff'}>
-                      <ImSpoonKnife size={22}/>
-                </NavlinkItem>
-              </Div>
-              
-            <Div $flex='1' $LG_flex='3'  $display='flex' $jc='center' $gap='1rem'>
-                {['home' , 'about'].map((item, index) => {
-                  return (
-                     <NavlinkItem $tt='capitalize' to={item === 'home' ? '/' : `/${item}`} key={index} onClick={()=>setNavItem(`/${item}`)} 
-                      $color={navItem === `/${item}` ? '#10b981' : '#fff'}  >
-                        {item}
-                     </NavlinkItem>
-                  )
-                } )}
-                 
-          
-            </Div>
-        
-            <Div $flex='2'  $display='flex' $jc='end' $ai='center' $gap='2rem' $margin='0 1rem 0 0'>
+         <Div $display='flex' $height='100%'  $ai='center' $width='95%' $LG_width='80%' $gap='1rem' $margin='auto' $fs='1rem' $position='relative' >
 
-                    <NavlinkItem to='/cart'>
-                      <Div  $position='relative' $display='flex' $jc='center' $ai='center' $width='auto' $margin='0 1rem  0 0'>
-                            <IconBag size='25' onClick={()=>setNavItem('/cart')} $color={navItem && location.pathname === '/cart' ? "#10b981" : '#fff'} /> 
-                            {bag !== 0 ?  
-                            <Span>{bag}</Span> : null}
-                        </Div> 
-                    </NavlinkItem>  
+            {/* dropdown menu      */}
 
-            </Div>
-              
-              {authentication.isLoggedIn ? 
-              <Div $display='flex' $jc='center' $ai='center' $width='auto' $margin='0 2rem 0 0' $gap='2rem'>
-                <Div $width='2rem' $height='2rem' $br='25px' >
-                  <Image src={userInfo.profile_img} $br='25px' />
+           <DropDwonMenu dropDown={dropDown} setDropDown={setDropDown} />
+
+            <Div $display='flex' $jc='center' $ai='center' $width='100%' $height='100%' $bg='#000' $position='absolute' $zindex='800'>
+
+                <Div $display='flex' $ai='center' $width='auto' >
+                    <NavlinkItem to='/' onClick={()=>setNavItem('/home')} $color={'#fff'}>
+                        <ImSpoonKnife size={22}/>
+                  </NavlinkItem>
                 </Div>
-                  <IconArrowDown color='#fff'  />
-              </Div>
-              :
-              <NavlinkItem to='/login' onClick={()=>setNavItem('/login')} $color={navItem === '/login' ? '#10b981' : '#fff'}>
-                Login
-              </NavlinkItem>}
-          
+                
+                <Div $flex='1' $LG_flex='3'  $display='flex' $jc='center' $gap='1rem' $margin='0 0 0 2rem'>
+                    {['home' , 'about'].map((item, index) => {
+                      return (
+                        <NavlinkItem $tt='capitalize' to={item === 'home' ? '/' : `/${item}`} key={index} onClick={()=>setNavItem(`/${item}`)} 
+                        $color={navItem === `/${item}` ? '#10b981' : '#fff'}  >
+                            {item}
+                        </NavlinkItem>
+                      )
+                    } )}
+                </Div>
+            
+                <Div $flex='2'  $display='flex' $jc='end' $ai='center' $gap='2rem' $margin='0 1rem 0 0'>
 
-          </Container>
+                        <NavlinkItem to='/cart'>
+                          <Div  $position='relative' $display='flex' $jc='center' $ai='center' $width='auto' $margin='0 1rem  0 0'>
+                                <IconBag size='25' onClick={()=>setNavItem('/cart')} $color={navItem && location.pathname === '/cart' ? "#10b981" : '#fff'} /> 
+                                {bag !== 0 ?  
+                                <Span>{bag}</Span> : null}
+                            </Div> 
+                        </NavlinkItem>  
+
+                </Div>
+                    <>
+                      {authentication.isLoggedIn ? 
+                      <Div $display='flex' $jc='center' $ai='center' $width='auto' $margin='0 1rem 0 0' $gap='1rem'>
+                      <Div $width='2rem' $height='2rem' $br='25px' >
+                      <Image src={userInfo?.profile_img} $br='25px' />
+                      </Div>
+                      <Button  $margin='0 2rem 0 0' $width='auto' $height='auto' $bg='transparent' $outline='none' $border='none' onClick={()=>setDropDown(!dropDown)}  onBlur={handleBlur}>
+                         <IconArrowDown color='#fff' $dropDown={dropDown}  />
+                      </Button>
+                      </Div>
+
+:
+<>
+                        {loading ?
+                        <Spinner padding='0rem' spinnerWidth={'30px'} spinnerHeight={'30px'} /> 
+                        :
+                        <NavlinkItem to='/login' onClick={()=>setNavItem('/login')} $color={navItem === '/login' ? '#10b981' : '#fff'}>
+                            Login
+                        </NavlinkItem> 
+                        }
+                    </>
+
+}
+                    </>
+        </Div>
+</Div>
+        </Container>
+
+        
     </Nav>
     )
   }
