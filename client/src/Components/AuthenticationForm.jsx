@@ -27,7 +27,9 @@ const AuthenticationForm = ({type}) => {
             const resp= await axios.post(serverRoute , data)
             if(resp.status === 200) {
                 toast.success('Login Successfully Welcome')
-                setTimeout(() => { navigate('/') }, 1500)
+                setTimeout(() => {
+                   navigate('/')
+                }, 1500)
                 
             }   
             if(resp.status === 201) {
@@ -70,7 +72,7 @@ const AuthenticationForm = ({type}) => {
 
 
   return (
-    <Container $width='100vw' $height={Height} $bg='#fff' $color='#000'  >
+    <Container $width='100vw' $height={Height} $bg='#fff' $color='#000'  >  
           <Toaster
      position='top-center'
       containerStyle={{

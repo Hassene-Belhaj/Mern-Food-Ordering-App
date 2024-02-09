@@ -37,7 +37,6 @@ var userSchema = new mongoose.Schema({
     },
     country : {
         type : String ,
-        default : 'Tunisia'
     },
     postal_code : {
         type : String ,

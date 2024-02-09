@@ -1,8 +1,12 @@
 import React from 'react'
 import { Container, Div, Image, Text, Title3 } from '../../Global/Global'
+import AnimationWrapper from '../../utils/animationWrapper'
 
 const index = () => {
+
   return (
+    <AnimationWrapper initial={{opacity : 0}} animate={{opacity : 1}} transition={{duration : 0.8}} exit={{opacity : 0}}>
+
     <Container  $display='flex' $jc='center' $ai='center' $width='100%' $height='100vh'   $margin='auto' $bg='#fff' $color='#000'>
 
       <Div $display='flex'  $fd='column' $LG_fd='row' $width='90%' $margin='auto' $padding='8rem 0' $gap='2rem' >
@@ -27,6 +31,7 @@ const index = () => {
 
 
     </Container>
+    </AnimationWrapper>
   )
 }
 

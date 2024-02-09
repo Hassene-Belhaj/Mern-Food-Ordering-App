@@ -15,15 +15,13 @@ import Payment from '../../Components/Payment';
 
 const index = () => {
   const cart = useSelector(state=>state.cart)
-  // console.log(cart);
+  const authentication = useSelector(state => state.authentication)
 
   const [userProfile , setUserProfile ] = useState(undefined)
-  const [time , setTime] = useState(null)
 
 
 
 
-  console.log(time);
 
 
  const tabs = ['Summary' , 'Delivery' , 'Payment' ]
@@ -31,6 +29,7 @@ const index = () => {
  const Height =`calc(100vh - 80px)`
 
  const [activeTab , setActiveTab] = useState(0)
+
  const height = `calc(100vh - 80px)`
 
 
@@ -68,7 +67,7 @@ const index = () => {
         <Div $maxwidth='500px' $display='flex' $margin='auto' >
             {activeTab === 1 ? 
             <>
-            {userProfile === undefined ?
+            {authentication.isLoggedIn ?
             <AuthenticationFormItem type='/login' padding='2rem 0'/> 
             :
             <AddressForm index={1} activeTab={activeTab} setActiveTab={setActiveTab}/>}

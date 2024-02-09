@@ -57,10 +57,10 @@ border-bottom: ${({$borderB})=>$borderB};
 border-right: ${({$borderR})=>$borderR};
 border-left: ${({$borderL})=>$borderL};
 border-radius: ${({$br})=>$br};
-border-top-left-radius:${({$br_top_left})=>$br_top_left};
-border-top-right-radius:${({$br_top_right})=>$br_top_right} ;
-border-bottom-right-radius:${({$br_bottom_right})=>$br_bottom_right} ;
-border-bottom-left-radius:${({$br_bottom_left})=>$br_bottom_left} ;
+border-top-left-radius:${({$borderTopLeftRadius})=>$borderTopLeftRadius};
+border-top-right-radius:${({borderTopRightRadius})=>borderTopRightRadius} ;
+border-bottom-right-radius:${({$borderBottomRightRadius})=>$borderBottomRightRadius} ;
+border-bottom-left-radius:${({$borderBottomLeftRadius})=>$borderBottomLeftRadius} ;
 box-shadow: ${({$boxShadow})=>$boxShadow};
 gap: ${({$gap})=>$gap};
 object-fit: ${({$of})=>$of};
@@ -235,6 +235,14 @@ ${sharedProps};
 export const Title3 = styled.h3`
 ${sharedProps};
 `
+export const Title4 = styled.h4`
+${sharedProps};
+`
+
+export const Title5 = styled.h5`
+${sharedProps};
+`
+
 export const Text = styled.p`
 ${sharedProps} ;
 `

@@ -36,7 +36,6 @@ export const fetchProfile = createAsyncThunk('/profile/profile' , async() => {
     try {
         const {data } = await axios.get('/profile')
         return data ;
-
     } catch (error) {
         console.log(error);
     }

@@ -48,23 +48,16 @@ const Login = AsyncWrapper(async(req,res,next) => {
                 new : true
             })
             
-    res.cookie('access_token' , token ,
-     {  
-        httpOnly : true ,
-        secure : true ,
-        sameSite : 'None' ,
-        expires : new Date(Date.now()+ 1000*60*60*24*3) , //3days,
-    })
-
-    res.status(200).json({success : true , msg : 'Sign In successfully' , token})
+            res.cookie('access_token' , token, {httpOnly : true , secure : true , sameSite : 'none' , maxAge : 72*60*60*1000})
+            res.status(200).json({success : true  , msg: 'sign in successfuly'})
     
 })
 
 const LogOut = AsyncWrapper(async(req , res , next) => {
      const cookies = req.cookies
      if(!cookies.access_token) return next(createCustomError('no content' , 204))
-    res.clearCookie('access_token', '' , {httpOnly : true , expiresIn : new Date(0)})
-    res.json({success : true , msg : 'logged out successfully' ,})
+     res.clearCookie('access_token' , {httpOnly : true , secure : true , sameSite : 'none'})
+     res.status(200).json({success : true , msg : ' log Out succesfully '})
 })
 
 const UserInfo = AsyncWrapper(async(req,res,next) => {
