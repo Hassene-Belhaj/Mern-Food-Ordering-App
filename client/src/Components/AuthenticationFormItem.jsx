@@ -9,7 +9,7 @@ import { useState } from 'react';
 import AnimationWrapper from '../utils/AnimationWrapper'
 
 
-const IconOpenEye = styled(FaRegEye)`
+export const IconOpenEye = styled(FaRegEye)`
 position: absolute;
 top: 50%;
 right: 1rem;
@@ -17,7 +17,7 @@ transform: translateY(-50%);
 cursor : pointer ;
 `
 
-const IconCloseEye = styled(FaRegEyeSlash)`
+export const IconCloseEye = styled(FaRegEyeSlash)`
 position: absolute;
 top: 50%;
 right: 1rem;
@@ -25,19 +25,19 @@ transform: translateY(-50%);
 cursor : pointer ;
 `
 
-const IconUser = styled(FiUser)`
+export const IconUser = styled(FiUser)`
 position: absolute;
 top: 50%;
 left: 1rem;
 transform: translateY(-50%);
 `
-const IconMail = styled(MdOutlineEmail)`
+export const IconMail = styled(MdOutlineEmail)`
 position: absolute;
 top: 50%;
 left: 1rem;
 transform: translateY(-50%);
 `
-const IconKey = styled(IoKeyOutline)`
+export const IconKey = styled(IoKeyOutline)`
 position: absolute;
 top: 50%;
 left: 1rem;

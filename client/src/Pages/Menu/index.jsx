@@ -7,6 +7,7 @@ import MenuProdcutDetailsCard from '../../Components/MenuProdcutDetailsCard'
 import Tabs from '../../Components/Tabs'
 import { useState } from 'react'
 import styled from 'styled-components'
+import AnimationWrapper from '../../utils/AnimationWrapper'
 
 
 
@@ -44,10 +45,10 @@ const index = () => {
               {products.products.map((productCategory , i) => {
                 return (
                   <Tabs
-                  key={i} index={i} list={productCategory.name.name}
-                  activeTab={activeTab} 
-                  setActive={setActiveTab} 
-                  switchColor='#10b981' 
+                    key={i} index={i} list={productCategory.name.name}
+                    activeTab={activeTab} 
+                    setActive={setActiveTab} 
+                    switchColor='#10b981' 
                   />
                   )
                 })}
@@ -59,8 +60,10 @@ const index = () => {
           {products.products[activeTab] && products.products[activeTab].products.map((item , index) => {
             return (
               <Div key={index} $gap='2rem'>
-                <MenuProdcutDetailsCard  product={item}/>
-              </Div>
+                        <AnimationWrapper key={index}  initial={{opacity : 0}} animate={{opacity : 1}} exit={{opcaity : 0}} transition={{duration : 0.8}} >
+                            <MenuProdcutDetailsCard  product={item}/>
+                      </AnimationWrapper>
+                      </Div>
             )
           }) 
           }

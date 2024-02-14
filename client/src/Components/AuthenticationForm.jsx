@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Container, Div, Form, Input, Navlink, Text, Title2, Title3 } from '../Global/Global'
+import {Container } from '../Global/Global'
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
@@ -13,7 +13,8 @@ const AuthenticationForm = ({type}) => {
   
   const authentication = useSelector(state=>state.authentication)
   const dispatch = useDispatch()
-  console.log(authentication);
+  // console.log(authentication);
+
 
      
    const navigate = useNavigate()
@@ -109,7 +110,7 @@ const AuthenticationForm = ({type}) => {
       }
     }}
     />
-            <AuthenticationFormItem handleSubmitAuth={handleSubmitAuth} type={type}  />
+            <AuthenticationFormItem handleSubmitAuth={handleSubmitAuth} type={type}/>
     </Container>
   )
 }

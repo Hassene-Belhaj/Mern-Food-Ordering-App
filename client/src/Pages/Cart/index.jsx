@@ -17,7 +17,6 @@ const index = () => {
   const cart = useSelector(state=>state.cart)
   const authentication = useSelector(state => state.authentication)
 
-  const [userProfile , setUserProfile ] = useState(undefined)
 
 
 

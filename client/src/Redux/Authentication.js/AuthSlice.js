@@ -7,6 +7,8 @@ import axios from "axios";
 const initialState = {
     auth : {} ,
     isLoggedIn : false,
+    status : 'idle',
+    error :null 
 }
 
 
@@ -22,24 +24,24 @@ const authSlice = createSlice({
         if(state.auth !== undefined) { // if not cookie
             state.isLoggedIn = true 
         } 
-       }
-        )
-        builder.addCase(fetchProfile.pending) ,(state , action) => {
-        state.status = 'pending'
-        state.isLoggedIn = false
-       } 
+       }) ;
+       builder.addCase(fetchProfile.pending , (state , action)=> {
+        state.status = 'loading' ;
+        state.isLoggedIn = false ;
+       })
+       builder.addCase(fetchProfile.rejected(), (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      });
+    
+      
     }
 })
 
 
 export const fetchProfile = createAsyncThunk('/profile/profile' , async() => {
-    try {
         const {data } = await axios.get('/profile')
         return data ;
-    } catch (error) {
-        console.log(error);
-    }
-
 })
 
 

@@ -29,7 +29,7 @@ const About = ({order,title,imageSrc , start}) => {
         initial="hidden"
         animate={animation}
         transition={{
-            duration : 0.4   ,
+            duration : 0.3   ,
             delay : 0.1
         }}
 

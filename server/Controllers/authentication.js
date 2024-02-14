@@ -99,6 +99,28 @@ const refreshToken = (req, res , next) => {
     })
 } 
 
+
+  const changePassword = AsyncWrapper(async(req , res , next)=> {
+     const user = req.user.id
+    const {currentPassword , newPassword} = req.body
+    if(!passwordRegex.test(currentPassword) || !passwordRegex.test(newPassword)) {
+        return next(createCustomError('password shoud be 6 to 9 characters long with a numeric , 1 lowercase and 1 uppercase letters',403))
+    }
+    const findUser = await authModel.findOne({_id  : user})
+    const ValidPassword = await bcrypt.compare(currentPassword , findUser.password)
+    if(!ValidPassword) return next(createCustomError('invalid Crentials' , 403))
+     const Salt = bcrypt.genSaltSync(10)
+     const CryptedNewPassword = bcrypt.hashSync(newPassword,Salt)
+     await authModel.findOneAndUpdate({_id : user} , 
+        {
+        password : CryptedNewPassword ,
+         } , {
+        new : true ,
+    })
+    res.status(201).json({success : true , msg : 'password updated with success !!'})
+  }) 
+
+
 module.exports = {
-    Register , Login , LogOut , UserInfo , refreshToken ,
+    Register , Login , LogOut , UserInfo , refreshToken , changePassword
 };

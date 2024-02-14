@@ -2,7 +2,9 @@ import React from 'react'
 import { Button, Div, Image, Text, Title3 } from '../Global/Global'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../Redux/Cart/cartSlice'
-import toast from 'react-hot-toast'
+
+
+
 const MenuProdcutDetailsCard = ({product}) => {
 
 
@@ -11,10 +13,11 @@ const cart = useSelector(state=>state.cart)
 
 const addProduct = () => {
   dispatch(addToCart(product)) 
-  toast.success(`${product.name} is added`)
 }
 
   return (
+
+    
   <Div $width='350px' $height='auto' $margin='auto' $padding='0 0 6rem 0' $color='#fff'>
         <Div $display='flex' $jc='space-between' $ai='center'>
             <Title3 $fs='1rem'>{product.name}</Title3>
@@ -28,7 +31,7 @@ const addProduct = () => {
         <Div $display='flex' $jc='center' $padding='2rem 0'>
         <Button onClick={addProduct} $fw='700' $fs='.9rem' $width='10rem' $height='3rem' $outline='none' $border='none' $bg='#10b981' $br='25px' $opacity='0.9' $transition='all ease-in-out 0.3s '>Add To Cart</Button>
 
-        </Div>
+ </Div>
 
 
     </Div>
