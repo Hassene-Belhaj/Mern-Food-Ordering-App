@@ -22,6 +22,10 @@ export const productSlice= createSlice({
         builder.addCase(fetchProducts.pending , (state , action) => {
             state.status= 'pending'
         })
+        builder.addCase(fetchProducts.rejected, (state, action) => {
+            state.status = "failed";
+            state.error = true;
+          });
     }
 })
 

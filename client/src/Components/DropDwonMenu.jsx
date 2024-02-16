@@ -11,7 +11,6 @@ font-weight: 600;
 
 
 const DropDown = styled(motion.div)`
-padding: 1rem 0;
 position: absolute;
 z-index: 10;
 top: ${({$dropDown})=>$dropDown ? '80px' : '-30rem'};
@@ -36,10 +35,10 @@ const DropDwonMenu = ({dropDown , userInfo , handleLogOut}) => {
          <DropDown
          $dropDown={dropDown}
          key={dropDown}
-         initial={{opacity : 0 , y : '-100%'}}
+         initial={{opacity : 0 , y : '-100vh'}}
          animate={{opacity : 1 , y : '0'}}
-         transition={{duration : 0.4}}
-         exit={{opacity : 0 ,  y : '-100%'}}
+         transition={{duration : 0.5}}
+         exit={{opacity : 0 ,  y : '-100vh'}}
          >
          <Div $display='flex' $fd='column' $ai='center' $jc='center' $bg='#fff' $color='#000'>
             {['Profile' ,'Dashbord' , 'Settings' ].map((item , i) =>{

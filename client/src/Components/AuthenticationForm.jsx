@@ -35,7 +35,9 @@ const AuthenticationForm = ({type}) => {
             }   
             if(resp.status === 201) {
                 toast.success('Register Successfully Welcome')
-                setTimeout(() => { navigate('/login') }, 1500)
+                setTimeout(() => { 
+                  navigate('/login') 
+                }, 1500)
             }
             
         } catch (error) {

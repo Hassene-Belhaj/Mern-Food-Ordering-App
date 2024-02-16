@@ -48,7 +48,7 @@ const Login = AsyncWrapper(async(req,res,next) => {
                 new : true
             })
             
-            res.cookie('access_token' , token, {httpOnly : true , secure : true , sameSite : 'none' , maxAge : 72*60*60*1000})
+            res.cookie('access_token' , token, {httpOnly : true , secure : true , sameSite : 'none' , maxAge : 3*24*60*60*1000})
             res.status(200).json({success : true  , msg: 'sign in successfuly'})
     
 })
@@ -120,7 +120,21 @@ const refreshToken = (req, res , next) => {
     res.status(201).json({success : true , msg : 'password updated with success !!'})
   }) 
 
+  const updateUserName =AsyncWrapper(async(req,res,next) => {
+    const userID = req.user.id
+    // console.log(userID);
+    const {username} = req.body
+    const resp = await authModel.findByIdAndUpdate({_id : userID}, {
+        username ,
+    } , {
+        new : true
+    })
+    console.log(resp);
+    const token = jwt.sign({id : resp._id , username : resp.username} , process.env.SECRETJWT , {expiresIn : '3d'})
+    res.cookie('access_token' , token , {httpOnly : true , secure :true , sameSite:'none' , maxAge  :  1000*60*60*24*3})
+    res.status(201).json({success : true , msg :'username updated with success'})
+  })
 
 module.exports = {
-    Register , Login , LogOut , UserInfo , refreshToken , changePassword
+    Register , Login , LogOut , UserInfo , refreshToken , changePassword ,updateUserName
 };

@@ -4,8 +4,8 @@ import axios from "axios";
 
 const initialState = {
     userInfo : {} ,
-    error : null ,
     status : 'idle' ,
+    error : null ,
 }
 
 
@@ -18,11 +18,15 @@ const User_Info =  createSlice({
         builder.addCase(FetchUserInfo.fulfilled , (state , action) => {
                state.status = 'fulfilled' 
                state.userInfo = {...action.payload}
-        }) ,
+        }) ;
         builder.addCase(FetchUserInfo.pending , (state , action) => {
             state.status = 'loading' ;
             state.userInfo = {}
-        } ) 
+        }) ; 
+        builder.addCase(FetchUserInfo.rejected, (state, action) => {
+            state.status = "failed";
+            state.error = true;
+          });
     }
 
  })

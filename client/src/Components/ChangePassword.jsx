@@ -33,7 +33,6 @@ const ChangePassword = () => {
       let formdata = new FormData(e.target)
       let Data = {} ;
       Data = Object.fromEntries(formdata.entries()) ;
-      console.log(Data);
        const {currentPassword , newPassword} = Data
        if(!passwordRegex.test(currentPassword) || !passwordRegex.test(newPassword)) {
        return toast.error('password shoud be 6 to 9 characters long with a numeric , 1 lowercase and 1 uppercase letters')

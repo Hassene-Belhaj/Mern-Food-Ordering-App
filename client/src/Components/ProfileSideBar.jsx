@@ -127,7 +127,7 @@ else {
         <Div $width='100%' >
 
             <AnimationWrapper initial={{opacity : 0}} animate={{opacity : 1}} transition={{duration : 0.8}} key={location.pathname}>
-                <Div $padding='4rem 0 0 0' $maxwidth='400px'>
+                <Div $padding='2rem 0 0 0' $maxwidth='400px'>
                       <EditProfile />
                 </Div>
             </AnimationWrapper>
@@ -151,7 +151,7 @@ else {
                   {location.pathname === '/settings/edit_profile' ?
                   
                         <AnimationWrapper initial={{opacity : 0}} animate={{opacity : 1}} transition={{duration : 0.8}} key={location.pathname}>
-                          <Div $padding='4rem 0 0 0' $maxwidth='400px'>
+                          <Div $padding='2rem 0 0 0' $maxwidth='400px'>
                           <EditProfile  />
                           </Div>
                       </AnimationWrapper>

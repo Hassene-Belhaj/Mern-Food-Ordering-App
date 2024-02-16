@@ -16,7 +16,7 @@ import { Title3 } from '../Global/Global'
 
 const Navigation = () => {
    const authentication = useSelector(state=>state.authentication)
-   console.log(authentication.isLoggedIn);
+  //  console.log(authentication.isLoggedIn);
 
   return (
     <>

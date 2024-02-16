@@ -1,5 +1,5 @@
 const express = require('express')
-const { Register, Login, LogOut, UserInfo, refreshToken, changePassword } = require('../Controllers/authentication')
+const { Register, Login, LogOut, UserInfo, refreshToken, changePassword, updateUserName } = require('../Controllers/authentication')
 const { verfiytoken } = require('../Token/token')
 const router =  express.Router()
 
@@ -13,7 +13,7 @@ router.route('/change_password').post(verfiytoken,changePassword)
 router.route('/profile').get(verfiytoken,async (req, res) => {
     res.status(200).json({success : true , msg :'you are authenticated' , user: req.user })
 })
-
+router.route('/edit_profile').put(verfiytoken,updateUserName)
 
 // router.route('/refresh').get(refreshToken , verfiytoken , UserInfo)
 

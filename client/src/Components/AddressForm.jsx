@@ -8,7 +8,7 @@ import { addAdress } from '../Redux/Address/AddressSlice';
 
 
 
-const AddressForm = ({activeTab , setActiveTab,index}) => {
+const AddressForm = ({activeTab , setActiveTab,index,_id,email,username}) => {
 
     const address = useSelector(state=>state.address)
     const dispatch = useDispatch()
@@ -31,9 +31,28 @@ const AddressForm = ({activeTab , setActiveTab,index}) => {
 
   return (
     <Form $display='flex' $fd='column' $gap='2rem'  onSubmit={handleSubmit} >
-        <Div $display='flex' $jc='center' $margin='auto'>
+
+        
+        <Div $display='flex' $jc='center' $margin='auto 0 4rem  auto'>
               <Text $fw='600' $width='80%' $ta='center'>For your transaction success, please fill the information carefully.</Text>
         </Div>
+
+        <Div $display='flex' $width='80%' $margin='auto' $gap='.5rem' >
+            
+            <Div $flex='1' $display='flex' $fd='column' $gap='1rem' >
+             <Div  $width='100%' $br='5px'>
+                  <Input disabled name='email' type='text' placeholder={email} autoComplete='off' $padding='.5rem' $width='100%' $height='2.5rem' $border='2px solid rgba(0,0,0,0.0)' $bg='#f3f5f9' $borderF='2px solid #10b981' $outline='none'  $transition='0.4s all ease-in-out' $br='5px' $colorPH='rgba(0,0,0,0.5)' $fw='600' /> 
+            </Div> 
+             
+        </Div>
+
+            <Div  $flex='1' $display='flex' $fd='column' $gap='1rem' >
+             <Div  $width='100%' $br='5px'>
+             <Input disabled name='username' type='text' placeholder={username} autoComplete='off' $padding='.5rem' $width='100%' $height='2.5rem' $border='2px solid rgba(0,0,0,0.0)' $bg='#f3f5f9' $borderF='2px solid #10b981' $outline='none'  $transition='0.4s all ease-in-out' $br='5px' $colorPH='rgba(0,0,0,0.5)' $fw='500' /> 
+            </Div> 
+            
+            </Div>
+        </Div>  
 
        <Div $display='flex' $fd='column' $width='80%' $margin='auto' $gap='1rem' >
             <Div $width='100%' $br='5px' >

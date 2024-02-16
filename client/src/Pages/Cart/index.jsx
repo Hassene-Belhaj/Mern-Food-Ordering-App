@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Div, Section, Text, Title2, Title3 } from '../../Global/Global';
+import { Container, Div, Navlink, Section, Text, Title2, Title3 } from '../../Global/Global';
 import Tabs from '../../Components/Tabs';
 import { useState } from 'react';
 import AddressForm from '../../Components/AddressForm';
@@ -10,16 +10,29 @@ import AuthenticationFormItem from '../../Components/AuthenticationFormItem';
 import axios from 'axios';
 import { useEffect } from 'react';
 import Payment from '../../Components/Payment';
+import { fetchProfile } from '../../Redux/Authentication.js/AuthSlice';
+import { FetchUserInfo } from '../../Redux/User_info/UserInfoSlice';
 
 
 
 const index = () => {
   const cart = useSelector(state=>state.cart)
   const authentication = useSelector(state => state.authentication)
+  const userInfo = useSelector(state=>state.userInfo)
+  const dispatch = useDispatch()
+  console.log(userInfo);
 
 
 
+useEffect(()=>{
+dispatch(fetchProfile())
+},[])
 
+useEffect(()=>{
+dispatch(FetchUserInfo())
+},[])
+
+const {_id , email ,username } = userInfo.userInfo
 
 
 
@@ -67,14 +80,17 @@ const index = () => {
             {activeTab === 1 ? 
             <>
             {authentication.isLoggedIn ?
-            <AuthenticationFormItem type='/login' padding='2rem 0'/> 
+            <AddressForm index={1} activeTab={activeTab} setActiveTab={setActiveTab} email={email} username={username} _id={_id}/>
             :
-            <AddressForm index={1} activeTab={activeTab} setActiveTab={setActiveTab}/>}
+            <Navlink to='/login'> 
+              login
+            </Navlink>
+            }
             </>
             :
             null }
         </Div>
-
+        
         {activeTab === 2 ? <Payment /> : null}
       </Section>
 

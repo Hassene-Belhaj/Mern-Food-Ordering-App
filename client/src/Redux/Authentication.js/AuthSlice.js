@@ -31,10 +31,9 @@ const authSlice = createSlice({
        })
        builder.addCase(fetchProfile.rejected(), (state, action) => {
         state.status = "failed";
-        state.error = action.payload;
+        state.error = true;
       });
-    
-      
+
     }
 })
 

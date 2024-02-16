@@ -49,7 +49,7 @@ transition:all 0.3s ease-in-out;
 const IconArrowDown = styled(IoIosArrowDown)`
 cursor: pointer;
 transform:${({$dropDown})=>$dropDown ? 'rotate(180deg)'  : null };
-transition: all ease-in-out 0.3s;
+transition: all ease-in-out 0.25s;
 `
 
 
@@ -87,7 +87,8 @@ const handleLogOut = async () => {
     console.log(data.msg);
     toast.success(data.msg)
     setTimeout(() => {
-      window.location.reload() 
+      navigate('/')
+      window.location.reload()
     }, 1500)
 
   } catch (error) {
@@ -103,6 +104,7 @@ const handleBlur = () => {
   setDropDown(false)
    }, 300)
  }
+
 
 
 const fetchUserInfo = async() => {
