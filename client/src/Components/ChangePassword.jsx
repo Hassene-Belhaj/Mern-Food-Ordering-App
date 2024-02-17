@@ -55,7 +55,7 @@ const ChangePassword = () => {
 
   
   return (
-  <Form $display='flex' $fd='column' $gap='2rem' onSubmit={handleUpdatePassword} >
+  <Form $display='flex' $fd='column' $width='100%'  $gap='2rem' onSubmit={handleUpdatePassword} >
     <Toaster
       position='top-center'
       containerStyle={{

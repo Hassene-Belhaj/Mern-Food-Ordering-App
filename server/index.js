@@ -5,6 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const Products_router = require('./Routes/products');
 const Authentication_router = require('./Routes/authentication');
+const Order_router = require('./Routes/order');
 const { errorHandling } = require('./MidleWare/errorHandler');
 const { NotFound } = require('./MidleWare/NotFound');
 
@@ -47,5 +48,6 @@ Start()
 
 app.use('/api/products' , Products_router)
 app.use('/api/' , Authentication_router)
+app.use('/api/' , Order_router)
 app.use(errorHandling)
 app.use(NotFound)

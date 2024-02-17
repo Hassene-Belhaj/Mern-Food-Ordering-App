@@ -4,69 +4,46 @@ const orderSchema = mongoose.Schema(
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,
-        required: false,
-        ref: "User",
+        required: true,
+        ref: "User_auth",
       },
-      orderItems: [
+      orderItems: [ 
         {
-          name: { type: String, required: true },
-          amount: { type: Number, required: true },
-          imageUrl: { type: String, required: true },
-          price: { type: Number, required: true },
-          product: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: "Product",
-          },
-        },
+          products : {
+            type : mongoose.Schema.Types.ObjectId ,
+            ref : 'Products'
+          }
+        }
       ],
       shippingAddress: {
-        address: { type: String, required: true },
-        city: { type: String, required: true },
-        postalCode: { type: String, required: true },
-        country: { type: String, required: true },
+        type : mongoose.Schema.Types.ObjectId,
+        ref :'User_auth',
       },
       paymentMethod: {
         type: String,
-        required: true,
-      },
-      paymentResult: {
-        id: { type: String },
-        status: { type: String },
-        update_time: { type: String },
-        email_address: { type: String },
-      },
-      taxPrice: {
-        type: Number,
-        required: true,
-        default: 0.0,
-      },
-      shippingPrice: {
-        type: Number,
-        required: true,
-        default: 0.0,
+        default : 'Cash_On_Delivery'
       },
       totalPrice: {
         type: Number,
         required: true,
         default: 0.0,
       },
-      isPaid: {
-        type: Boolean,
-        required: true,
-        default: false,
-      },
-      paidAt: {
-        type: Date,
-      },
-      isDelivered: {
-        type: Boolean,
-        required: true,
-        default: false,
-      },
-      deliveredAt: {
-        type: Date,
-      },
+      // orderStatus: {
+      //   type : String ,
+      //   default : "Not Processed" ,
+      //   enum  : [
+      //       "Not Processed" ,
+      //       "Cash On Delivery" ,
+      //       "Processing",
+      //       "dispatching",
+      //       "Canceled" ,
+      //       "Delivered"
+      //   ]
+      // },
+      // deliveredAt: {
+      //   type: Date,
+      //   default: (new Date(Date.now()+1000*60*60*24*3).toString().slice(0,15)),
+      // },
     },
     {
       timestamps: true,

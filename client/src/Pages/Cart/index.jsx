@@ -76,7 +76,7 @@ const {_id , email ,username } = userInfo.userInfo
 
         </Div>
 
-        <Div $maxwidth='500px' $display='flex' $margin='auto' >
+        <Div $maxwidth='600px' $display='flex' $jc='center' $margin='auto' >
             {activeTab === 1 ? 
             <>
             {authentication.isLoggedIn ?

@@ -13,7 +13,7 @@ import Toast from '../utils/Toast';
 import { useState } from 'react';
 
 const InputEdit = styled.input`
-padding: 0 0 0 3rem;
+padding-left:${({$padding})=>$padding ? $padding : '3rem'};
 width: 100%;
 height: 2.5rem;
 outline: none;
@@ -30,9 +30,17 @@ font-weight: 600;
 
 
 
+// regex ADDRESS
+let Regex_city = /[a-zA-Z]{3,20}/gi ;
+let Regex_postCode = /^[0-9]{4}$/gi ;
+let Regex_Street_address = /[a-zA-Z0-9\s]/gi
+
+
 const EditProfile = () => {
+  
   const userInfo = useSelector(state=>state.userInfo)
   // console.log(userInfo.userInfo);
+  // console.log(userInfo.userInfo.address);
   const dispatch =  useDispatch()
 
 
@@ -40,7 +48,7 @@ const EditProfile = () => {
     dispatch(FetchUserInfo())
   },[])
   
-  const {_id , email ,username, profile_img } = userInfo.userInfo
+  const {_id , email ,username, profile_img, address } = userInfo.userInfo
 
   const usernameRef =  useRef()
 
@@ -51,12 +59,12 @@ const EditProfile = () => {
     let formdata = new FormData(e.target)
     let data = {} ;
     data = Object.fromEntries(formdata.entries()) ;
-    const {username} = data
-    if(username){
-      if(username.length < 4 ) return  toast.error('Username must be at least 4 letters long')
-    }
+    const {street_address,state,city,postalCode} = data
+    // if(username){
+    //   if(username.length < 7 ) return  toast.error('Username must be at least 4 letters long')
+    // }
      try {
-      const {data} = await axios.put('/edit_profile' , {username})
+      const {data} = await axios.post('/update_address' , {street_address,state,city,postalCode})
       if(data.success === true) {
         toast.success(data.msg)
         usernameRef.current.value = ''
@@ -73,7 +81,7 @@ const EditProfile = () => {
   return (
     <Section>
        <Toast />
-          <Div $width='10rem' $height='10rem'  $margin='1rem auto'>
+          <Div $width='8rem' $height='100%'  $margin='1rem auto'>
             <Image  $width='100%' $height='100%' $br='50%' src={profile_img} />
           </Div>
          <Form onSubmit={handleEditUsername}  $display='flex' $fd='column' $gap='1rem'>
@@ -92,6 +100,51 @@ const EditProfile = () => {
               <IconMail />
             </Div>
           </Div>   
+{/* Address */}
+          <Div>
+            <Label >Street Address</Label>
+            <Div $margin='1rem 0' $width='100%' $position='relative'>
+              <InputEdit $padding='1rem' name='street_address' type='text' autoComplete='off' placeholder={address.street_address}/>
+            </Div>
+          </Div>  
+
+          <Div $display='flex' $gap='1rem'>
+
+          <Div>
+            <Label >City</Label>
+            <Div $margin='1rem 0' $width='100%' $position='relative'>
+              <InputEdit $padding='1rem' name='city' type='text' autoComplete='off' placeholder={address.city} />
+            </Div>
+          </Div>  
+
+          <Div>
+            <Label >State </Label>
+            <Div $margin='1rem 0' $width='100%' $position='relative'>
+              <InputEdit $padding='1rem' name='state' type='text' autoComplete='off' placeholder={address.state} />
+            </Div>
+          </Div>  
+
+          </Div>
+
+          <Div $display='flex' $gap='1rem'>
+
+          <Div>
+            <Label >Country</Label>
+            <Div $margin='1rem 0' $width='100%' $position='relative'>
+              <InputEdit $padding='1rem' name='country' type='text' autoComplete='off' placeholder='Tunisia' />
+            </Div>
+          </Div>  
+
+          <Div>
+            <Label >Postal Code </Label>
+            <Div $margin='1rem 0' $width='100%' $position='relative'>
+              <InputEdit $padding='1rem' name='postalCode' type='text' autoComplete='off' placeholder={address.postalCode} />
+            </Div>
+          </Div>  
+
+          </Div>
+
+
           <Div $padding='2rem 0'>
             <Button $width='100%' $height='3rem' $border='none' $br='25px' $bg='#000' $color='#fff' $opacity='0.8' $transition='all ease-in-out 0.3s'>Update</Button>
           </Div>

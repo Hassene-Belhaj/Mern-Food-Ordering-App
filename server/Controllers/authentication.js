@@ -120,21 +120,49 @@ const refreshToken = (req, res , next) => {
     res.status(201).json({success : true , msg : 'password updated with success !!'})
   }) 
 
-  const updateUserName =AsyncWrapper(async(req,res,next) => {
+  const updateUser =AsyncWrapper(async(req,res,next) => {
     const userID = req.user.id
     // console.log(userID);
-    const {username} = req.body
+    const {username,street_address,city,postalCode} = req.body
     const resp = await authModel.findByIdAndUpdate({_id : userID}, {
-        username ,
+         username ,
     } , {
         new : true
     })
-    console.log(resp);
+    if(!resp) return next(createCustomError('something went wrong ! please try later!' , 500))
+    const {password , __v , ...others} = resp._doc
     const token = jwt.sign({id : resp._id , username : resp.username} , process.env.SECRETJWT , {expiresIn : '3d'})
     res.cookie('access_token' , token , {httpOnly : true , secure :true , sameSite:'none' , maxAge  :  1000*60*60*24*3})
-    res.status(201).json({success : true , msg :'username updated with success'})
+    res.status(201).json({success : true , msg :'User Info updated with success' , others})
   })
 
+
+
+
+  const update_address = AsyncWrapper(async(req,res,next)=> {
+    const userID = req.user.id
+    const {street_address,state,city,postalCode} = req.body
+    const user = await authModel.findOne({_id : userID})
+    if(!user) return next(createCustomError('something went wrong please try later !' , 500))
+    if(!user.address.street_address || !user.address.city || !user.address.postalCode || !user.address.state) {
+        if(!street_address || !city || !postalCode || !state) return next(createCustomError('please fill all required fields ',403))
+    }
+    const findUser = await authModel.findOneAndUpdate({_id : userID}, {
+        "address" : {
+            street_address : street_address ? street_address : user.address.street_address  ,
+            city : city ? city : user.address.city  ,
+            postalCode : postalCode ? postalCode : user.address.postalCode  ,
+            state : state ? state : user.address.state  ,
+         }
+    } , {
+        new : true
+    })
+
+    if(!findUser) return next(createCustomError('something went wrong ! please try later' , 500))
+    const {password, ...others} = findUser._doc
+    res.status(201).json({success : true , others , msg : 'user info update successfully'})
+})
+
 module.exports = {
-    Register , Login , LogOut , UserInfo , refreshToken , changePassword ,updateUserName
+    Register , Login , LogOut , UserInfo , refreshToken , changePassword ,updateUser,update_address
 };

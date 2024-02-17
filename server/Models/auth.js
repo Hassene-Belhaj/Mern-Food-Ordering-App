@@ -26,23 +26,16 @@ var userSchema = new mongoose.Schema({
             return `https://api.dicebear.com/6.x/${profile_imgs_collections_list[Math.floor(Math.random() * profile_imgs_collections_list.length)]}/svg?seed=${profile_imgs_name_list[Math.floor(Math.random() * profile_imgs_name_list.length)]}`
         } 
     },
-    Street_Address : {
-        type : String ,
+    address : {
+        street_address: { type: String, required: false },
+        city: { type: String, required: false },
+        postalCode: { type: String, required: false  },
+        country: { type: String, required: false , default : 'Tunisia' },
+        state: { type: String, required: false },
     },
-    city : {
-        type : String ,
-    },
-    State : {
-        type : String ,
-    },
-    country : {
-        type : String ,
-    },
-    postal_code : {
-        type : String ,
-    },
-    access_token : {
-        type : String
+    order : {
+        type : mongoose.Schema.Types.ObjectId ,
+        ref : 'Order'
     }
 },{timeseries : {createdAt : 'joinedAt'}});
 

@@ -26,8 +26,6 @@ border: .1px solid rgba(0,0,0,1);
 
 
 
-
-
 const ProfileSideBar = () => {
 
     // const [pageState , setPageState] = useState('')
@@ -68,15 +66,13 @@ if(authentication.status==='failed') return <Navigate to='/login' /> // if not a
 else if(authentication.status === 'loading') return <Div $width='100%' $height='100vh'> <Spinner/></Div> // waiting fecth result
 else {
     return (
-    <Container  $width='80%' $height='100vh' $padding='4rem 0 0 0' $margin='auto' $gap='1rem' >
+    <Container  $width='80%' $height='100%' $padding='4rem 0 0 0' $margin='auto' $gap='1rem' >
 
          <Div $display='block' $MD_display='none'>
             <Outlet />
          </Div>
 
     <Section $display='flex' $padding='4rem 0' >
-         
- 
         {/* // left column */}
         <Div $display='flex' $fd='column'>
                   <Div $display='flex' $jc='start' $ai='center' $width='100%' $gap='2rem' $padding='0 0 2rem 0'>
@@ -88,7 +84,8 @@ else {
             <Hr/>
 
             {toggleMenu ? 
-           <Div $padding='4rem 0 0 0' $width='auto' $display='flex' $fd='column' $gap='2rem' >
+
+           <Div $padding='4rem 0 0 0' $width='100%' $display='flex' $fd='column' $gap='2rem' > 
 
                     <Div $display='flex' $width='100%' $padding='1rem' $ai='center' $height='3rem'  $gap='1rem'>
                             <FaBell />
@@ -118,14 +115,12 @@ else {
                             <Text >Change Password</Text>
                         </Div>
                     </Navlink>
-        
             </Div> 
 
         :
         <>
         {location.pathname === '/settings/edit_profile'  ?
         <Div $width='100%' >
-
             <AnimationWrapper initial={{opacity : 0}} animate={{opacity : 1}} transition={{duration : 0.8}} key={location.pathname}>
                 <Div $padding='2rem 0 0 0' $maxwidth='400px'>
                       <EditProfile />
@@ -135,7 +130,7 @@ else {
     
             :
             <AnimationWrapper initial={{opacity : 0}} animate={{opacity : 1}} transition={{duration : 0.8}}>
-                <Div $padding='4rem 0 0 0' $width='270px'>
+                <Div $padding='4rem 0 0 0' $width='340px'>
                         <ChangePassword />
                 </Div>
             </AnimationWrapper>
@@ -143,30 +138,30 @@ else {
         </>
             
         } 
+
           
         </Div> 
           {/* // right column */}
-             <Div $width='100%' $padding='0 0rem 0 4rem' $display='none' $MD_display='block '>
+             <Div  $width='100%' $padding='0 0rem 0 4rem' $display='none' $MD_display='block'>
                  <Outlet />
                   {location.pathname === '/settings/edit_profile' ?
                   
-                        <AnimationWrapper initial={{opacity : 0}} animate={{opacity : 1}} transition={{duration : 0.8}} key={location.pathname}>
-                          <Div $padding='2rem 0 0 0' $maxwidth='400px'>
+                  <AnimationWrapper initial={{opacity : 0}} animate={{opacity : 1}} transition={{duration : 0.8}} key={location.pathname}>
+                          <Div $padding='2rem 0 0 0' $width='400px'>
                           <EditProfile  />
                           </Div>
                       </AnimationWrapper>
                     :
                     <AnimationWrapper initial={{opacity : 0}} animate={{opacity : 1}} transition={{duration : 0.8}}>
-                        <Div $padding='4rem 0 0 0' $maxwidth='400px'>
+                        <Div $padding='4rem 0 0 0' $width='400px'>
                                 <ChangePassword  />
                         </Div>
                     </AnimationWrapper>
                 }
             </Div>
-   
         </Section>
-
-</Container>
+        
+        </Container>
     
         )
     }

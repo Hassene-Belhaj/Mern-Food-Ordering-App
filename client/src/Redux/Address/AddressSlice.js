@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    address : [] ,
+    address : {} ,
+    
 }
 
 
@@ -11,10 +12,10 @@ const AddressSlice = createSlice({
     initialState ,
     reducers : {
         addAdress : (state , action) => {
-            state.address.push(action.payload)
+            state.address = action.payload
         } ,
         clearAdress : (state , action) => {
-            return {address : [] }
+            return {address : {} }
         }
 
     }

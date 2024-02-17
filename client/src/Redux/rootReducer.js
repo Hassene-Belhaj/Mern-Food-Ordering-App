@@ -10,7 +10,7 @@ import UserInfoSlice from "./User_info/UserInfoSlice";
 const rootReducer = combineReducers({
     cart : cartSlice ,
     products : productsSlice ,
-    address : AddressSlice ,
+    // address : AddressSlice ,
     authentication : AuthSlice ,
     userInfo : UserInfoSlice
 
