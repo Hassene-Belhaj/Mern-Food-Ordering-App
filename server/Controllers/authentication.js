@@ -139,7 +139,7 @@ const refreshToken = (req, res , next) => {
 
 
 
-  const update_address = AsyncWrapper(async(req,res,next)=> {
+  const update_user_info = AsyncWrapper(async(req,res,next)=> {
     const userID = req.user.id
     const {street_address,state,city,postalCode} = req.body
     const user = await authModel.findOne({_id : userID})
@@ -164,5 +164,5 @@ const refreshToken = (req, res , next) => {
 })
 
 module.exports = {
-    Register , Login , LogOut , UserInfo , refreshToken , changePassword ,updateUser,update_address
+    Register , Login , LogOut , UserInfo , refreshToken , changePassword ,updateUser,update_user_info
 };

@@ -3,7 +3,7 @@ import { Button, Div, Form, Input } from '../Global/Global'
 import { IconCloseEye, IconKey, IconOpenEye } from './AuthenticationFormItem'
 import { useState } from 'react'
 import axios from 'axios';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import Spinner from '../utils/Spinner';
 
 
@@ -55,45 +55,8 @@ const ChangePassword = () => {
 
   
   return (
-  <Form $display='flex' $fd='column' $width='100%'  $gap='2rem' onSubmit={handleUpdatePassword} >
-    <Toaster
-      position='top-center'
-      containerStyle={{
-      position: 'absolute',
-      top : '80px' ,
-      right : '0',
-      display : 'flex' ,
-      justifyContent:'center'
-    }}
-    toastOptions={{
-      style : {
-        borderRadius : '0px' ,
-        display : 'flex' ,
-        justifyContent : 'center' ,
-        alignItems : 'center' ,
-        flexDirection : 'column' ,
-        gap : '.5rem' ,
-        background : '#fff' ,
-        color : '#000',
-        padding : '1rem' ,
-        fontSize : '0.8rem' ,
-        fontWeight : '600' ,
-        textAlign : 'center',
-      },
-      success : {
-        duration : 1500 ,
-        iconTheme: {
-          primary: '#14b8a6',
-        },
-      },
-      error : {
-        duration : 1500 ,
-        iconTheme: {
-          primary: '#e11d48',
-        },
-      }
-    }}
-    />
+  <Form $display='flex' $fd='column'  $width='100%'  $gap='2rem' onSubmit={handleUpdatePassword} >
+
     <Div $position='relative' $width='100%' $height='2.5rem' $margin='auto' $br='5px'>
             <Input ref={refCurrentPwd} $fw='600' $colorPH='#000' name='currentPassword' type={toggle ? 'text' : 'password'}  placeholder='Current Password' $width='100%' $height='100%' $bg='#f3f5f9' $outline='none' $border='2px solid rgba(0,0,0,0)' $borderF='2px solid #10b981' $transition='all ease-in-out 0.4s' $padding='0 0 0 3rem' $br='5px'/>
             <IconKey size={20}  />

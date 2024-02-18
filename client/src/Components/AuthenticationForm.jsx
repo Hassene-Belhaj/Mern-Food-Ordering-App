@@ -1,6 +1,6 @@
 import React from 'react'
 import {Container } from '../Global/Global'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import AuthenticationFormItem from './AuthenticationFormItem';
@@ -76,42 +76,6 @@ const AuthenticationForm = ({type}) => {
 
   return (
     <Container $width='100vw' $height={Height} $bg='#fff' $color='#000'  >  
-          <Toaster
-     position='top-center'
-      containerStyle={{
-      position: 'absolute',
-      top : '80px' ,
-      right : '0'
-    }}
-    toastOptions={{
-      style : {
-        borderRadius : '0px' ,
-        display : 'flex' ,
-        justifyContent : 'center' ,
-        alignItems : 'center' ,
-        flexDirection : 'column' ,
-        gap : '.5rem' ,
-        background : '#fff' ,
-        color : '#000',
-        padding : '1rem' ,
-        fontSize : '0.8rem' ,
-        fontWeight : '600' ,
-        textAlign : 'center',
-      },
-      success : {
-        duration : 500 ,
-        iconTheme: {
-          primary: '#14b8a6',
-        },
-      },
-      error : {
-        duration : 1000 ,
-        iconTheme: {
-          primary: '#e11d48',
-        },
-      }
-    }}
-    />
             <AuthenticationFormItem handleSubmitAuth={handleSubmitAuth} type={type}/>
     </Container>
   )

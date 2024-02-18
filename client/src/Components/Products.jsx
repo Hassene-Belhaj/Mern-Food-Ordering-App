@@ -9,6 +9,7 @@ import "react-multi-carousel/lib/styles.css";
 import { useDispatch} from 'react-redux'
 import { addToCart } from '../Redux/Cart/cartSlice'
 import Spinner from '../utils/Spinner'
+import toast from 'react-hot-toast'
 
 
 const responsive = {
@@ -44,6 +45,7 @@ const Products = () => {
 
 
     const addProduct = (product) => {
+        toast.dismiss()
         dispatch(addToCart(product))
     }
 
@@ -64,7 +66,7 @@ useEffect(()=>{
 },[])    
 
     return ( 
-        <Section  $bg='#000' $color='#fff' $margin='0 0 4rem 0'>
+        <Section $bg='#000' $color='#fff' $margin='0 0 4rem 0'>
  
            {products?.length > 1 ?     
             <Div $width='80%' $margin='auto'>

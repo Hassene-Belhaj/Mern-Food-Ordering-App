@@ -8,6 +8,7 @@ import { Div, Text, Title3 } from '../Global/Global';
 const Container = styled.div`
 padding: ${({$padding})=>$padding ? $padding : '5rem'};
 width: ${({$width})=>$width};
+height: ${({$height})=>$height};
 `
 
 const Logo = styled(ImSpoonKnife)`
@@ -40,9 +41,9 @@ border-radius: 50%;
 
 
 
-const Spinner = ({padding , spinnerWidth , spinnerHeight}) => {
+const Spinner = ({padding, width , height, spinnerWidth , spinnerHeight}) => {
   return (
-    <Container $padding={padding} >
+    <Container $padding={padding} $height={height} $width={width}>
           <Div $position='relative' $display='flex'  $jc='center' $ai='center'> 
            <SpinnerLoading $spinnerWidth={spinnerWidth} $spinnerHeight={spinnerHeight}> </SpinnerLoading>
           {/* <Logo /> */}

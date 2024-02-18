@@ -36,7 +36,7 @@ const About = ({order,title,imageSrc , start}) => {
       
       >
 
-       <Container  ref={ref} $bg='#fff' $width='80%' $display='flex'  $margin='auto'  $gap='1rem' $fd='row' $LG_fd='row' $MD_fd='column' $SM_fd='column' $XS_fd='column'  >
+       <Container   ref={ref} $display='flex'  $margin='auto'  $width='80%'  $bg='#fff' $gap='1rem' $fd='row' $LG_fd='row' $MD_fd='column' $SM_fd='column' $XS_fd='column'  >
 
           <Div $flex='3' $display='flex' $fd='column' $jc='center'  $padding='1rem'  $bg='#fff' $color='#000' $order={order ? order : '0'}>
                 <Title2 $fs='3rem'  $padding='1rem 0' $bg='#fff' $color='#000'>{title}</Title2>

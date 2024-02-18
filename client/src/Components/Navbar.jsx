@@ -13,7 +13,7 @@ import axios from 'axios';
 import Spinner from '../utils/Spinner';
 import DropDwonMenu from './DropDwonMenu';
 import { fetchProfile } from '../Redux/Authentication.js/AuthSlice';
-import toast , {Toaster} from 'react-hot-toast';
+import toast  from 'react-hot-toast';
 
 const Span = styled.span`
 position: absolute;
@@ -85,7 +85,9 @@ const handleLogOut = async () => {
   try {
     const {data} = await axios.post('/logout')
     console.log(data.msg);
-    toast.success(data.msg)
+    setTimeout(() => { 
+      toast.success(data.msg)
+     }, 500)
     setTimeout(() => {
       navigate('/')
       window.location.reload()
@@ -133,43 +135,7 @@ useEffect(()=> {
 
   return (
   <Nav $bg='#000' $color='#fff' $width='100vw' $height='80px' >
-    <Toaster
-     position='top-center'
-      containerStyle={{
-      position: 'absolute',
-      top : '80px' ,
-      right : '0'
-    }}
-    toastOptions={{
-      style : {
-        borderRadius : '0px' ,
-        display : 'flex' ,
-        justifyContent : 'center' ,
-        alignItems : 'center' ,
-        flexDirection : 'column' ,
-        gap : '.5rem' ,
-        background : '#fff' ,
-        color : '#000',
-        padding : '1rem' ,
-        fontSize : '0.8rem' ,
-        fontWeight : '600' ,
-        textAlign : 'center',
-      },
-      success : {
-        duration : 1000 ,
-        iconTheme: {
-          primary: '#14b8a6',
-        },
-      },
-      error : {
-        duration : 1000 ,
-        iconTheme: {
-          primary: '#e11d48',
-        },
-      }
-    }}
-    />
-    
+  
       <Container $width='100%' $height='100%' $bg='#000'>
 
          <Div $display='flex' $height='100%'  $ai='center' $width='80%' $gap='1rem' $margin='auto' $fs='1rem' $position='relative' >

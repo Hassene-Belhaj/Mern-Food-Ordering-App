@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Div, Image, Text, Title3 } from '../Global/Global'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../Redux/Cart/cartSlice'
+import toast from 'react-hot-toast'
 
 
 
@@ -12,7 +13,9 @@ const dispatch = useDispatch()
 const cart = useSelector(state=>state.cart)
 
 const addProduct = () => {
+  toast.dismiss()
   dispatch(addToCart(product)) 
+  toast.success(`${product.name} added with success`)
 }
 
   return (
